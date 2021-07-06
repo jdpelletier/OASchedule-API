@@ -10,8 +10,6 @@ def writeToJson(f):
 
     df = df[~(df['Date'] == 'Date')]
 
-    # df = df[~(df['Date'] == ('K1' | 'R1' | 'K1O' | 'K1T' | 'K2' | 'R2' | 'K2O' | 'K2T' | 'HQ' | 'PD' | 'SD' | 'JD' | 'OM' | 'X' | 'L' | 'H'))]
-
     df = df[~(df['Date'] == 'K1')]
     df = df[~(df['Date'] == 'R1')]
     df = df[~(df['Date'] == 'K1O')]
@@ -29,7 +27,21 @@ def writeToJson(f):
     df = df[~(df['Date'] == 'L')]
     df = df[~(df['Date'] == 'H')]
 
-    # df.to_excel("filteredsched.xlsx")
+    df.rename(columns={'Institution.1':'Institution2'}, inplace=True)
+
+    for col in df:
+        if '.' in col:
+            df = df.drop(col, 1)
+
+    search = False
+    for col in df:
+        if col == 'K1 Instrument':
+            search = True
+        if col == 'K2 Instrument':
+            search = False
+        if col != 'K1 Instrument' and col.isupper() == False and search == True:
+            df = df.drop(col, 1)
+
     df = df.to_json(orient='records')
     parsed = json.loads(df)
 
