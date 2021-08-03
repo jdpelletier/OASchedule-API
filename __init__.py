@@ -13,8 +13,8 @@ def create_app():
     #
     # db.init_app(app)
 
-    from .views import main
+    import views
 
-    app.register_blueprint(main)
+    app.register_blueprint(views.main)
 
     return app

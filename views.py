@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, request
-from .Util import writeToJson, readFromJson
+import Util
 from flask_cors import cross_origin
 
 
@@ -10,11 +10,11 @@ main = Blueprint('main', __name__)
 def update_schedule():
     f = request.files['file']
     # f = 'C:\\Users\\johnp\\Desktop\\Keck\\Software\\OASchedule\\OASchedule-API\\sched.xlsx'
-    status = writeToJson(f)
+    status = Util.writeToJson(f)
     return readFromJson('data.json')
 
 @main.route('/')
 @cross_origin()
 def display_schedule():
     f = 'data.json'
-    return readFromJson(f)
+    return Util.readFromJson(f)

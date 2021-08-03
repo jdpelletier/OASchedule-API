@@ -1,4 +1,5 @@
 import pandas as pd
+from datetime import timezone, datetime, timedelta
 import json
 
 def writeToJson(f):
@@ -27,7 +28,10 @@ def writeToJson(f):
     df = df[~(df['Date'] == 'L')]
     df = df[~(df['Date'] == 'H')]
 
-    df.rename(columns={'Institution.1':'Institution2'}, inplace=True)
+    df['Date'] = df['Date'].dt.tz_localize(timezone(timedelta(hours=-10))) #convert to HST
+
+    df.rename(columns={'Institution':'Institution:K1'}, inplace=True)
+    df.rename(columns={'Institution.1':'Institution:K2'}, inplace=True)
 
     for col in df:
         if '.' in col:
@@ -35,12 +39,12 @@ def writeToJson(f):
 
     search = False
     for col in df:
-        if col == 'K1 Instrument':
-            search = True
         if col == 'K2 Instrument':
             search = False
-        if col != 'K1 Instrument' and col.isupper() == False and search == True:
+        if col != col.isupper() == False and search == True:
             df = df.drop(col, 1)
+        if col == 'K1 Instrument':
+            search = True
 
     df = df.to_json(orient='records')
     parsed = json.loads(df)
