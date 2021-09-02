@@ -65,10 +65,12 @@ def exportPersonalSchedule(f, employee):
     df = pd.read_json('data.json')
     for col in df:
         if col != employee and col != 'Date':
-            df = df.drop(col, 1)
-    df.rename(columns={'Date':'Start Date', employee:'Subject'}, inplace=True)
+            df = df.drop(col)
+    df['just_date'] = df['Date'].dt.date
+    df.rename(columns={'just_date':'Start Date', employee:'Subject'}, inplace=True)
+    df.drop('Date')
 
-    df['Date'] = df['Date'].dt.date
+
 
     work_days = ['K1', 'R1', 'K1O', 'K1T', 'R2', 'K2', 'K2O', 'K2T', 'HQ', 'PD', 'SD', 'OM']
     location = []
