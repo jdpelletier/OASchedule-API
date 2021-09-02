@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, jsonify, request, send_file
 import Util
 from flask_cors import cross_origin
 
@@ -9,7 +9,6 @@ main = Blueprint('main', __name__)
 @cross_origin()
 def update_schedule():
     f = request.files['file']
-    # f = 'C:\\Users\\johnp\\Desktop\\Keck\\Software\\OASchedule\\OASchedule-API\\sched.xlsx'
     status = Util.writeToJson(f)
     return readFromJson('data.json')
 
@@ -18,3 +17,12 @@ def update_schedule():
 def display_schedule():
     f = 'data.json'
     return Util.readFromJson(f)
+
+@main.route('/get-employee-schedule', methods=['POST'])
+@cross_origin
+def getEmployeeSchedule():
+    f = request.get_json()
+    try:
+		return send_file(Util.exportPersonalSchedule('data.json', f["employee"]), attachment_filename=f'{employee}.csv')
+	except Exception as e:
+		return str(e)

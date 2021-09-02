@@ -60,3 +60,30 @@ def readFromJson(f):
         data = json.load(json_file)
 
     return json.dumps(data)
+
+def exportPersonalSchedule(f, employee):
+    df = pd.read_json('data.json')
+    for col in df:
+        if col != employee and col != 'Date':
+            df = df.drop(col, 1)
+    df.rename(columns={'Date':'Start Date', employee:'Subject'}, inplace=True)
+
+    work_days = ['K1', 'R1', 'K1O', 'K1T', 'R2', 'K2', 'K2O', 'K2T', 'HQ', 'PD', 'SD', 'OM']
+    location = []
+    for ind in df.index:
+        current = df['Subject'][ind]
+        if current not in work_days:
+            df.drop(ind, inplace=True)
+        elif current.startswith('K') or current == 'SD':
+            location.append('Summit')
+        elif current.startswith('R') or current == 'HQ':
+            location.append('Headquarters')
+        else:
+            location.append('No location')
+
+    df['Location'] = location
+
+    subject = df.pop('Subject')
+    df.insert(0, 'Subject', subject)
+    df.to_csv(f'{employee}.csv', index=False)
+    return f'{employee}.csv'
