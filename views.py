@@ -23,6 +23,6 @@ def display_schedule():
 def getEmployeeSchedule():
     f = request.get_json()
     try:
-		return send_file(Util.exportPersonalSchedule('data.json', f["employee"]), attachment_filename=f'{employee}.csv')
-	except Exception as e:
-		return str(e)
+        return send_file(Util.exportPersonalSchedule('data.json', f["employee"]), attachment_filename=f'{employee}.csv')
+    except Exception as e:
+        return str(e)
