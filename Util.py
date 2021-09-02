@@ -68,7 +68,7 @@ def exportPersonalSchedule(f, employee):
             df = df.drop(col, 1)
     df['just_date'] = df['Date'].dt.date
     df.rename(columns={'just_date':'Start Date', employee:'Subject'}, inplace=True)
-    df.drop('Date', 1)
+    df = df.drop('Date', 1)
 
 
 
