@@ -22,6 +22,6 @@ def display_schedule():
 @cross_origin()
 def getEmployeeSchedule():
     emp = request.get_json()
-    response = make_response(send_file(Util.exportPersonalSchedule('data.json', emp["employee"]), as_attachment=True)
+    response = make_response(send_file(Util.exportPersonalSchedule('data.json', emp["employee"]), as_attachment=True))
     response.headers['attachment_filename'] = f'{emp["employee"]}.csv'
     return response
