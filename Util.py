@@ -72,7 +72,7 @@ def exportPersonalSchedule(f, employee):
 
 
 
-    work_days = ['K1', 'R1', 'K1O', 'R10', 'K1T', 'R1T', 'R2', 'K2', 'R20', 'K2O', 'R2T', 'K2T', 'HQ', 'PD', 'SD', 'OM']
+    work_days = ['K1', 'R1', 'K1O', 'R1O', 'K1T', 'R1T', 'R2', 'K2', 'R2O', 'K2O', 'R2T', 'K2T', 'HQ', 'PD', 'SD', 'OM']
     location = []
     for ind in df.index:
         current = df['Subject'][ind]
