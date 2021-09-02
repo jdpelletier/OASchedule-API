@@ -21,8 +21,9 @@ def display_schedule():
 @main.route('/get-employee-schedule', methods=['POST'])
 @cross_origin
 def getEmployeeSchedule():
-    f = request.get_json()
+    emp = request.get_json()
+    print(emp)
     try:
-        return send_file(Util.exportPersonalSchedule('data.json', f["employee"]), attachment_filename=f'{employee}.csv')
+        return send_file(Util.exportPersonalSchedule('data.json', emp["employee"]), attachment_filename=f'{employee}.csv')
     except Exception as e:
         return str(e)
