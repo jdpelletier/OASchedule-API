@@ -19,7 +19,7 @@ def display_schedule():
     return Util.readFromJson(f)
 
 @main.route('/get-employee-schedule', methods=['POST'])
-@cross_origin
+@cross_origin()
 def getEmployeeSchedule():
     emp = request.get_json()
     print(emp)
