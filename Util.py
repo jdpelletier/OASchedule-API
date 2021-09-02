@@ -68,6 +68,8 @@ def exportPersonalSchedule(f, employee):
             df = df.drop(col, 1)
     df.rename(columns={'Date':'Start Date', employee:'Subject'}, inplace=True)
 
+    df['Date'] = df['Date'].dt.date
+
     work_days = ['K1', 'R1', 'K1O', 'K1T', 'R2', 'K2', 'K2O', 'K2T', 'HQ', 'PD', 'SD', 'OM']
     location = []
     for ind in df.index:

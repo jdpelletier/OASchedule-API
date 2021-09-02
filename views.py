@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify, request, send_file, make_response
+from flask import Blueprint, jsonify, request, send_file
 import Util
 from flask_cors import cross_origin
 
@@ -22,6 +22,7 @@ def display_schedule():
 @cross_origin()
 def getEmployeeSchedule():
     emp = request.get_json()
-    response = make_response(send_file(Util.exportPersonalSchedule('data.json', emp["employee"]), as_attachment=True))
-    response.headers['attachment_filename'] = f'{emp["employee"]}.csv'
-    return response
+    try:
+        return send_file(Util.exportPersonalSchedule('data.json', emp["employee"]), attachment_filename=f'{emp["employee"]}.csv', as_attachment=True)
+    except Exception as e:
+        return str(e)
