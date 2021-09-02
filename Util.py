@@ -65,10 +65,10 @@ def exportPersonalSchedule(f, employee):
     df = pd.read_json('data.json')
     for col in df:
         if col != employee and col != 'Date':
-            df = df.drop(col)
+            df = df.drop(col, 1)
     df['just_date'] = df['Date'].dt.date
     df.rename(columns={'just_date':'Start Date', employee:'Subject'}, inplace=True)
-    df.drop('Date')
+    df.drop('Date', 1)
 
 
 
