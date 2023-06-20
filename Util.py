@@ -89,6 +89,7 @@ def readFromTelSched():
         data = response.json()
         observers.append(data)
     
+    print(observers)
     ns = []
     for x in range(0, len(nightstaff)):
         ns += nightstaff[x]
@@ -104,7 +105,6 @@ def readFromTelSched():
     for x in range(0, len(observers)):
         os += observers[x]
     kOne = [x for x in os if "1" in x["TelNr"]]
-    print("test")
     kTwo = [x for x in os if "2" in x["TelNr"]]
     ##TODO finish adding observer stuff
 
