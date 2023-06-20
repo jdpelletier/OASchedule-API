@@ -132,11 +132,11 @@ def readFromTelSched():
                     break
                 if s_date == d:
                     if night["K1 PI"] == "":
-                        night["K1 PI"] += observer["PiLastName"]
+                        night["K1 PI"] += observer["Principal"]
                         night["K1 Institution"] += observer["Institution"]
                         night["K1 Instrument"] += observer["Instrument"]
                     else:
-                        night["K1 PI"] += " / " + observer["PiLastName"]
+                        night["K1 PI"] += " / " + observer["Principal"]
                         night["K1 Institution"] += " / " + observer["Institution"]
                         night["K1 Instrument"] += " / " + observer["Instrument"]
 
