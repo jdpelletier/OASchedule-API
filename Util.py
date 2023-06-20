@@ -114,7 +114,7 @@ def readFromTelSched():
                 if s_date == d:
                     name = staff["FirstName"][0] + staff["LastName"][0]
                     shift = staff["Type"].upper()
-                    if "r" in shift:
+                    if "R" in shift:
                         tel = "R" + staff["TelNr"]
                         night[name] = shift.replace("OAR", tel)
                     else:
