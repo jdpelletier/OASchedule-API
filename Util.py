@@ -89,7 +89,9 @@ def readFromTelSched():
         # data = response.json()
         # observers.append(data)
 
-    nightstaff= sum(nightstaff)
+    for x in nightstaff:
+        nightstaff = nightstaff + nightstaff[x]
+    # nightstaff=nightstaff[0]+nightstaff[1]+nightstaff[2]+nightstaff[3]+nightstaff[4]
     nightstaff[:] = [x for x in nightstaff if "oa" in x["Type"] or "na" in x["Type"]]
 
     oas = [x for x in nightstaff if "oa" in x["Type"]]
@@ -105,7 +107,6 @@ def readFromTelSched():
             night = {}
             night["DOW"] = d.strftime('%A')[:3]
             night["Date"] = datetime.fromtimestamp(time.mktime(d.timetuple())).timestamp()*1000
-            # night[]
             # night["Holiday"] = None #todo get holidays
             for name in oa_names:
                 night[name] = None
