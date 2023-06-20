@@ -109,7 +109,6 @@ def readFromTelSched():
                 night[name] = None
             people = 0
             for staff in oas:
-                people += 1
                 s_date = datetime.strptime(staff["Date"], '%Y-%m-%d').date()
                 if s_date > d:
                     break
@@ -119,9 +118,11 @@ def readFromTelSched():
                     if "R" in shift:
                         tel = "R" + staff["TelNr"]
                         night[name] = shift.replace("OAR", tel)
+                        people += 1
                     else:
                         tel = "K" + staff["TelNr"]
                         night[name] = shift.replace("OA", tel)
+                        people += 1
             if people == 0:
                 break
                     
