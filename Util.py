@@ -130,9 +130,9 @@ def readFromTelSched():
                         night["K1 Institution"] += observer["Institution"]
                         night["K1 Instrument"] += observer["Instrument"]
                     else:
-                        night["K1 PI"] += "/" + observer["PiLastName"]
-                        night["K1 Institution"] += "/" + observer["Institution"]
-                        night["K1 Instrument"] += "/" + observer["Instrument"]
+                        night["K1 PI"] += " / " + observer["PiLastName"]
+                        night["K1 Institution"] += " / " + observer["Institution"]
+                        night["K1 Instrument"] += " / " + observer["Instrument"]
 
             for name in oa_names:
                 night[name] = None
