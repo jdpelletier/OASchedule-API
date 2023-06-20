@@ -82,12 +82,11 @@ def readFromTelSched():
     d = dates[0] + "-1"
     response = requests.get(f"https://www.keck.hawaii.edu/software/db_api/telSchedule.php?cmd=getSchedule&date={d}&numdays=120")
     observers = response.json()
-    print(observers)
     os = []
     for x in range(0, len(observers)):
         os += observers[x]
-    kOne = [x for x in os if "1" in x["TelNr"]]
-    kTwo = [x for x in os if "2" in x["TelNr"]]
+    kOne = [x for x in observers if "1" in x["TelNr"]]
+    kTwo = [x for x in observers if "2" in x["TelNr"]]
     
     nightstaff = []
 
