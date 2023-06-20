@@ -84,6 +84,9 @@ def readFromTelSched():
         response = requests.get(f"https://www.keck.hawaii.edu/software/db_api/telSchedule.php?cmd=getNightStaff&date={d}")
         data = response.json()
         nightstaff.append(data)
+        # response = requests.get(f"https://www.keck.hawaii.edu/software/db_api/telSchedule.php?cmd=getSchedule&date={d}")
+        # data = response.json()
+        # observers.append(data)
 
     nightstaff=nightstaff[0]+nightstaff[1]+nightstaff[2]+nightstaff[3]+nightstaff[4]
     nightstaff[:] = [x for x in nightstaff if "oa" in x["Type"] or "na" in x["Type"]]
@@ -102,8 +105,6 @@ def readFromTelSched():
             night["DOW"] = d.strftime('%A')[:3]
             night["Date"] = datetime.fromtimestamp(time.mktime(d.timetuple())).timestamp()*1000
             night["Holiday"] = None #todo get holidays
-            night["Summit Staff"] = summit_staff
-            night["Remote OAs"] = remote_oa
             schedule.append(night)
 
     return(json.dumps(schedule))
