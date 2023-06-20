@@ -88,12 +88,13 @@ def readFromTelSched():
         # response = requests.get(f"https://www.keck.hawaii.edu/software/db_api/telSchedule.php?cmd=getSchedule&date={d}")
         # data = response.json()
         # observers.append(data)
-
+    
+    ns = []
     for x in range(0, len(nightstaff)):
-        nightstaff = nightstaff + nightstaff[x]
+        ns += nightstaff[x]
     # nightstaff=nightstaff[0]+nightstaff[1]+nightstaff[2]+nightstaff[3]+nightstaff[4]
 
-    oas = [x for x in nightstaff if "oa" in x["Type"]]
+    oas = [x for x in ns if "oa" in x["Type"]]
     oa_names = []
     for n in oas:
         name = n["FirstName"][0] + n["LastName"][0]
