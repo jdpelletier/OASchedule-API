@@ -118,6 +118,7 @@ def readFromTelSched():
             # night["Holiday"] = None #todo get holidays
             response = requests.get(f"https://www.keck.hawaii.edu/software/db_api/telSchedule.php?cmd=getSchedule&date={d}&column=Date,Instrument,Institution,TelNr,Principal")
             observers = response.json()
+            print(observer)
             os = []
             for x in range(0, len(observers)):
                 os += observers[x]
