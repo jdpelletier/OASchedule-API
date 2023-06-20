@@ -89,8 +89,8 @@ def readFromTelSched():
         # data = response.json()
         # observers.append(data)
 
-    # for x in nightstaff:
-    #     nightstaff = nightstaff + nightstaff[x]
+    for x in range(len(nightstaff)):
+        nightstaff += nightstaff[x]
     # nightstaff=nightstaff[0]+nightstaff[1]+nightstaff[2]+nightstaff[3]+nightstaff[4]
     nightstaff[:] = [x for x in nightstaff if "oa" in x["Type"] or "na" in x["Type"]]
 
