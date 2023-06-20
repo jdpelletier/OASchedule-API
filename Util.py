@@ -116,8 +116,6 @@ def readFromTelSched():
             night["DOW"] = d.strftime('%A')[:3]
             night["Date"] = datetime.fromtimestamp(time.mktime(d.timetuple())).timestamp()*1000
             # night["Holiday"] = None #todo get holidays
-            for name in oa_names:
-                night[name] = None
 
             night["K1 PI"] = ""
             night["K1 Institution"] = ""
@@ -135,6 +133,9 @@ def readFromTelSched():
                         night["K1 PI"] += "/" + observer["PiLastName"]
                         night["K1 Institution"] += "/" + observer["Institution"]
                         night["K1 Instrument"] += "/" + observer["Instrument"]
+
+            for name in oa_names:
+                night[name] = None
 
             people = 0
             for staff in oas:
@@ -154,6 +155,23 @@ def readFromTelSched():
                         people += 1
             if people == 0:
                 break
+
+            night["K2 PI"] = ""
+            night["K2 Institution"] = ""
+            night["K2 Instrument"] = ""
+            for observer in kTwo:
+                s_date = datetime.strptime(observer["Date"], '%Y-%m-%d').date()
+                if s_date > d:
+                    break
+                if s_date == d:
+                    if night["K2 PI"] == "":
+                        night["K2 PI"] += observer["PiLastName"]
+                        night["K2 Institution"] += observer["Institution"]
+                        night["K2 Instrument"] += observer["Instrument"]
+                    else:
+                        night["K2 PI"] += "/" + observer["PiLastName"]
+                        night["K2 Institution"] += "/" + observer["Institution"]
+                        night["K2 Instrument"] += "/" + observer["Instrument"]
                     
             schedule.append(night)
 
