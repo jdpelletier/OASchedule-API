@@ -116,9 +116,8 @@ def readFromTelSched():
             night["DOW"] = d.strftime('%A')[:3]
             night["Date"] = datetime.fromtimestamp(time.mktime(d.timetuple())).timestamp()*1000
             # night["Holiday"] = None #todo get holidays
-            response = requests.get(f"https://www.keck.hawaii.edu/software/db_api/telSchedule.php?cmd=getNightStaff&date={d}&column=Date,Instrument,Institution,TelNr,Principal")
+            response = requests.get(f"https://www.keck.hawaii.edu/software/db_api/telSchedule.php?cmd=getSchedule&date={d}&column=Date,Instrument,Institution,TelNr,Principal")
             observers = response.json()
-            print(observers)
             os = []
             for x in range(0, len(observers)):
                 os += observers[x]
