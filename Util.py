@@ -107,7 +107,9 @@ def readFromTelSched():
             # night["Holiday"] = None #todo get holidays
             for name in oa_names:
                 night[name] = None
+            people = 0
             for staff in oas:
+                people += 1
                 s_date = datetime.strptime(staff["Date"], '%Y-%m-%d').date()
                 if s_date > d:
                     break
@@ -120,6 +122,8 @@ def readFromTelSched():
                     else:
                         tel = "K" + staff["TelNr"]
                         night[name] = shift.replace("OA", tel)
+            if people == 0:
+                break
                     
             schedule.append(night)
 
