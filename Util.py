@@ -105,7 +105,7 @@ def readFromTelSched():
             night = {}
             night["DOW"] = d.strftime('%A')[:3]
             night["Date"] = datetime.fromtimestamp(time.mktime(d.timetuple())).timestamp()*1000
-            night[]
+            # night[]
             # night["Holiday"] = None #todo get holidays
             for name in oa_names:
                 night[name] = None
