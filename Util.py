@@ -116,7 +116,7 @@ def readFromTelSched():
             night["DOW"] = d.strftime('%A')[:3]
             night["Date"] = datetime.fromtimestamp(time.mktime(d.timetuple())).timestamp()*1000
             # night["Holiday"] = None #todo get holidays
-
+            print(d)
             night["K1 PI"] = ""
             night["K1 Institution"] = ""
             night["K1 Instrument"] = ""
