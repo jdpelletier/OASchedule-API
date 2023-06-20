@@ -125,7 +125,10 @@ def readFromTelSched():
                 if s_date > d:
                     break
                 if s_date == d:
-                    night["K1 Instrument"] += observer["Instrument"]
+                    if night["K1 Instrument"] == "":
+                        night["K1 Instrument"] += observer["Instrument"]
+                    else:
+                        night["K1 Instrument"] += "/" + observer["Instrument"]
 
             people = 0
             for staff in oas:
