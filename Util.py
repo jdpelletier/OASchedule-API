@@ -102,6 +102,9 @@ def readFromTelSched():
     for i in range(startmonth,lastmonth):
         for d in [x for x in Calendar().itermonthdates(startyear, i) if x.month == i]: #todo add checks for different years
             night = {}
+            night["DOW"] = d.strftime('%A')[:3]
+            night["Date"] = datetime.fromtimestamp(time.mktime(d.timetuple())).timestamp()*1000
+            night["Holiday"] = None #todo get holidays
             for name in oa_names:
                 night[name] = None
             for staff in nightstaff:
@@ -110,10 +113,12 @@ def readFromTelSched():
                     break
                 if s_date == d:
                     name = staff["FirstName"][0] + staff["LastName"][0]
-                    night[name] = staff["Type"].upper()
-            night["DOW"] = d.strftime('%A')[:3]
-            night["Date"] = datetime.fromtimestamp(time.mktime(d.timetuple())).timestamp()*1000
-            night["Holiday"] = None #todo get holidays
+                    shift = staff["Type"].upper()
+                    if "r" in shift:
+                        tel = "R" + staff["TelNr"]
+                    else:
+                        tel = "K" + staff["TelNr"]
+                    night[name] = shift.replace("OA", tel)
             schedule.append(night)
 
     return(json.dumps(schedule))
