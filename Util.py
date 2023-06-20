@@ -119,15 +119,21 @@ def readFromTelSched():
             for name in oa_names:
                 night[name] = None
 
+            night["K1 PI"] = ""
+            night["K1 Institution"] = ""
             night["K1 Instrument"] = ""
             for observer in kOne:
                 s_date = datetime.strptime(observer["Date"], '%Y-%m-%d').date()
                 if s_date > d:
                     break
                 if s_date == d:
-                    if night["K1 Instrument"] == "":
+                    if night["K1 PI"] == "":
+                        night["K1 PI"] += observer["PiLastName"]
+                        night["K1 Institution"] += observer["Institution"]
                         night["K1 Instrument"] += observer["Instrument"]
                     else:
+                        night["K1 PI"] += "/" + observer["PiLastName"]
+                        night["K1 Institution"] += "/" + observer["Institution"]
                         night["K1 Instrument"] += "/" + observer["Instrument"]
 
             people = 0
