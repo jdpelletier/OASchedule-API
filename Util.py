@@ -102,6 +102,17 @@ def readFromTelSched():
     for i in range(startmonth,lastmonth):
         for d in [x for x in Calendar().itermonthdates(startyear, i) if x.month == i]: #todo add checks for different years
             night = {}
+            for name in oa_names:
+                night[name] = None
+            for staff in nightstaff:
+                s_date = datetime.strptime(staff["Date"], '%Y-%m-%d').date()
+                if s_date > d:
+                    break
+                if s_date == d:
+                    name = staff["FirstName"][0] + staff["LastName"][0]
+                    night[name] = staff["Type"].upper()
+            if summit_staff == 0:
+                break
             night["DOW"] = d.strftime('%A')[:3]
             night["Date"] = datetime.fromtimestamp(time.mktime(d.timetuple())).timestamp()*1000
             night["Holiday"] = None #todo get holidays
