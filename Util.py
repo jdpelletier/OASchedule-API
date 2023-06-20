@@ -79,17 +79,23 @@ def readFromTelSched():
         day = today+relativedelta(months=i)
         dates.append(day.strftime("%Y-%m"))
 
+    d = dates[0] + "-1"
+    response = requests.get(f"https://www.keck.hawaii.edu/software/db_api/telSchedule.php?cmd=getSchedule&date={d}&numdays=120")
+    observers = response.json()
+    print(observers)
+    os = []
+    for x in range(0, len(observers)):
+        os += observers[x]
+    kOne = [x for x in os if "1" in x["TelNr"]]
+    kTwo = [x for x in os if "2" in x["TelNr"]]
+    
     nightstaff = []
-    observers = []
+
     for d in dates:
         response = requests.get(f"https://www.keck.hawaii.edu/software/db_api/telSchedule.php?cmd=getNightStaff&date={d}")
         data = response.json()
-        nightstaff.append(data)
-        response = requests.get(f"https://www.keck.hawaii.edu/software/db_api/telSchedule.php?cmd=getSchedule&date={d}")
-        data = response.json()
-        observers.append(data)
+        nightstaff.append(data)     
     
-    print(observers)
     ns = []
     for x in range(0, len(nightstaff)):
         ns += nightstaff[x]
@@ -101,11 +107,7 @@ def readFromTelSched():
         if name not in oa_names:
             oa_names.append(name)
 
-    os = []
-    for x in range(0, len(observers)):
-        os += observers[x]
-    kOne = [x for x in os if "1" in x["TelNr"]]
-    kTwo = [x for x in os if "2" in x["TelNr"]]
+   
     ##TODO finish adding observer stuff
 
     schedule = []
