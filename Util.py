@@ -169,9 +169,9 @@ def readFromTelSched():
                         night["K2 Institution"] += observer["Institution"]
                         night["K2 Instrument"] += observer["Instrument"]
                     else:
-                        night["K2 PI"] += "/" + observer["PiLastName"]
-                        night["K2 Institution"] += "/" + observer["Institution"]
-                        night["K2 Instrument"] += "/" + observer["Instrument"]
+                        night["K2 PI"] += " / " + observer["PiLastName"]
+                        night["K2 Institution"] += " / " + observer["Institution"]
+                        night["K2 Instrument"] += " / " + observer["Instrument"]
                     
             schedule.append(night)
 
