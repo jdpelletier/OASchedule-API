@@ -85,14 +85,13 @@ def readFromTelSched():
         response = requests.get(f"https://www.keck.hawaii.edu/software/db_api/telSchedule.php?cmd=getNightStaff&date={d}")
         data = response.json()
         nightstaff.append(data)
-        # response = requests.get(f"https://www.keck.hawaii.edu/software/db_api/telSchedule.php?cmd=getSchedule&date={d}")
-        # data = response.json()
-        # observers.append(data)
+        response = requests.get(f"https://www.keck.hawaii.edu/software/db_api/telSchedule.php?cmd=getSchedule&date={d}")
+        data = response.json()
+        observers.append(data)
     
     ns = []
     for x in range(0, len(nightstaff)):
         ns += nightstaff[x]
-    # nightstaff=nightstaff[0]+nightstaff[1]+nightstaff[2]+nightstaff[3]+nightstaff[4]
 
     oas = [x for x in ns if "oa" in x["Type"]]
     oa_names = []
@@ -100,6 +99,13 @@ def readFromTelSched():
         name = n["FirstName"][0] + n["LastName"][0]
         if name not in oa_names:
             oa_names.append(name)
+
+    os = []
+    for x in range(0, len(observers)):
+        os += observers[x]
+    kOne = [x for x in os if "1" in x["TelNr"]]
+    kTwo = [x for x in os if "2" in x["TelNr"]]
+    ##TODO finish adding observer stuff
 
     schedule = []
     for i in range(startmonth,lastmonth):
@@ -110,6 +116,15 @@ def readFromTelSched():
             # night["Holiday"] = None #todo get holidays
             for name in oa_names:
                 night[name] = None
+
+            night["K1 Instrument"] = ""
+            for observer in kOne:
+                s_date = datetime.strptime(observer["Date"], '%Y-%m-%d').date()
+                if s_date > d:
+                    break
+                if s_date == d:
+                    night["K1 Instrument"] += observer["Instrument"]
+
             people = 0
             for staff in oas:
                 s_date = datetime.strptime(staff["Date"], '%Y-%m-%d').date()
