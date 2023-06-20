@@ -79,14 +79,14 @@ def readFromTelSched():
         day = today+relativedelta(months=i)
         dates.append(day.strftime("%Y-%m"))
 
-    # d = dates[0] + "-1"
-    # response = requests.get(f"https://www.keck.hawaii.edu/software/db_api/telSchedule.php?cmd=getSchedule&date={d}&numdays=120")
-    # observers = response.json()
-    # os = []
-    # for x in range(0, len(observers)):
-    #     os += observers[x]
-    # kOne = [x for x in observers if "1" in x["TelNr"]]
-    # kTwo = [x for x in observers if "2" in x["TelNr"]]
+    d = dates[0] + "-1"
+    response = requests.get(f"https://www.keck.hawaii.edu/software/db_api/telSchedule.php?cmd=getSchedule&date={d}&numdays=120")
+    observers = response.json()
+    os = []
+    for x in range(0, len(observers)):
+        os += observers[x]
+    kOne = [x for x in observers if "1" in x["TelNr"]]
+    kTwo = [x for x in observers if "2" in x["TelNr"]]
     
     nightstaff = []
 
@@ -116,13 +116,13 @@ def readFromTelSched():
             night["DOW"] = d.strftime('%A')[:3]
             night["Date"] = datetime.fromtimestamp(time.mktime(d.timetuple())).timestamp()*1000
             # night["Holiday"] = None #todo get holidays
-            response = requests.get(f"https://www.keck.hawaii.edu/software/db_api/telSchedule.php?cmd=getSchedule&date={d}&column=Date,Instrument,Institution,TelNr,Principal")
-            observers = response.json()
-            os = []
-            for x in range(0, len(observers)):
-                os += observers[x]
-            kOne = [x for x in observers if "1" in x["TelNr"]]
-            kTwo = [x for x in observers if "2" in x["TelNr"]]
+            # response = requests.get(f"https://www.keck.hawaii.edu/software/db_api/telSchedule.php?cmd=getSchedule&date={d}&column=Date,Instrument,Institution,TelNr,Principal")
+            # observers = response.json()
+            # os = []
+            # for x in range(0, len(observers)):
+            #     os += observers[x]
+            # kOne = [x for x in observers if "1" in x["TelNr"]]
+            # kTwo = [x for x in observers if "2" in x["TelNr"]]
             night["K1 PI"] = ""
             night["K1 Institution"] = ""
             night["K1 Instrument"] = ""
