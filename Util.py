@@ -107,7 +107,7 @@ def readFromTelSched():
             # night["Holiday"] = None #todo get holidays
             for name in oa_names:
                 night[name] = None
-            for staff in nightstaff:
+            for staff in oas:
                 s_date = datetime.strptime(staff["Date"], '%Y-%m-%d').date()
                 if s_date > d:
                     break
