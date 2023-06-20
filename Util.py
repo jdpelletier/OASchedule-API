@@ -116,9 +116,11 @@ def readFromTelSched():
                     shift = staff["Type"].upper()
                     if "r" in shift:
                         tel = "R" + staff["TelNr"]
+                        night[name] = shift.replace("OAR", tel)
                     else:
                         tel = "K" + staff["TelNr"]
-                    night[name] = shift.replace("OA", tel)
+                        night[name] = shift.replace("OA", tel)
+                    
             schedule.append(night)
 
     return(json.dumps(schedule))
