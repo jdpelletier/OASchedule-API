@@ -80,6 +80,8 @@ def readFromTelSched():
         dates.append(day.strftime("%Y-%m"))
 
     d = dates[0] + "-1"
+    l = dates[3] + "-1"
+    holidays = get_holidays(d, l)
     response = requests.get(f"https://www.keck.hawaii.edu/software/db_api/telSchedule.php?cmd=getSchedule&date={d}&numdays=120")
     observers = response.json()
     os = []
@@ -115,7 +117,9 @@ def readFromTelSched():
             night = {}
             night["Date"] = datetime.fromtimestamp(time.mktime(d.timetuple())).timestamp()*1000
             night["DOW"] = d.strftime('%A')[:3]
-            # night["Holiday"] = None #todo get holidays
+            night["Holiday"] = False
+            if d in holidays:
+                night["Holiday"] = True
             # response = requests.get(f"https://www.keck.hawaii.edu/software/db_api/telSchedule.php?cmd=getSchedule&date={d}&column=Date,Instrument,Institution,TelNr,Principal")
             # observers = response.json()
             # os = []
@@ -213,3 +217,29 @@ def exportPersonalSchedule(f, employee):
     df.insert(0, 'Subject', subject)
     df.to_csv(f'{employee}.csv', index=False)
     return f'{employee}.csv'
+
+
+def get_holidays(startdate, enddate):
+    """
+    Returns any scheduled holidays for the time period
+    """
+    dbhost = "mysqlserver"
+    dbuser = "sched"
+    dbpwd  = "sched"
+    db     = "common"
+    hConn = pymysql.connect(host=dbhost, user=dbuser, password=dbpwd, db=db, cursorclass=pymysql.cursors.DictCursor)
+    hCursor = hConn.cursor()
+
+    query = 'SELECT * FROM holidays WHERE date>=%s and date<=%s'
+    result = hCursor.execute(query, (startdate,enddate,))
+    entries = hCursor.fetchall()
+
+    if hConn:
+        hCursor.close()
+        hConn.close()
+
+    holidays = []
+    for entry in entries:
+        holidays.append(entry['date'].strftime('%Y-%m-%d'))
+
+    return json.dumps(holidays)
