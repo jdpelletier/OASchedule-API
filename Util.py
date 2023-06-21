@@ -113,8 +113,8 @@ def readFromTelSched():
     for i in range(startmonth,lastmonth):
         for d in [x for x in Calendar().itermonthdates(startyear, i) if x.month == i]: #todo add checks for different years
             night = {}
-            night["DOW"] = d.strftime('%A')[:3]
             night["Date"] = datetime.fromtimestamp(time.mktime(d.timetuple())).timestamp()*1000
+            night["DOW"] = d.strftime('%A')[:3]
             # night["Holiday"] = None #todo get holidays
             # response = requests.get(f"https://www.keck.hawaii.edu/software/db_api/telSchedule.php?cmd=getSchedule&date={d}&column=Date,Instrument,Institution,TelNr,Principal")
             # observers = response.json()
