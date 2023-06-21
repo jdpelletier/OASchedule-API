@@ -5,6 +5,8 @@ import requests
 from dateutil.relativedelta import relativedelta
 from calendar import Calendar
 import time
+import pymysql
+import pymysql.cursors
 
 def writeToJson(f):
 
