@@ -34,4 +34,4 @@ holidays = []
 for entry in entries:
     holidays.append(entry['date'].strftime('%Y-%m-%d'))
 
-print(json.dumps(holidays)) 
+print(holidays)
