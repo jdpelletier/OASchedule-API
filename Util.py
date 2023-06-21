@@ -244,4 +244,4 @@ def get_holidays(startdate, enddate):
     for entry in entries:
         holidays.append(entry['date'].strftime('%Y-%m-%d'))
 
-    return json.dumps(holidays)
+    return holidays
