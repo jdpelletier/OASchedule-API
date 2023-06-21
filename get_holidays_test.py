@@ -13,7 +13,7 @@ import pymysql.cursors
 Returns any scheduled holidays for the time period
 """
 startdate = "2022-01-01"
-enddate = "2022-01-01"
+enddate = "2023-01-01"
 
 dbhost = "mysqlserver"
 dbuser = "sched"
