@@ -19,7 +19,8 @@ dbhost = "mysqlserver"
 dbuser = "sched"
 dbpwd  = "sched"
 db     = "common"
-hConn = pymysql.connect(dbhost, dbuser, dbpwd, db, cursorclass=pymysql.cursors.DictCursor)
+hConn = pymysql.connect(dbhost, dbuser, dbpwd, db, pymysql.cursors.DictCursor)
+# hConn = pymysql.connect(dbhost, dbuser, dbpwd, db, cursorclass=pymysql.cursors.DictCursor)
 hCursor = hConn.cursor()
 
 query = 'SELECT * FROM holidays WHERE date>=%s and date<=%s'
