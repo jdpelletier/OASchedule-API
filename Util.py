@@ -208,31 +208,23 @@ def getObserversFromTelSchedule():
 
     for night in data:
         for observer in kOne:
-                s_date = datetime.strptime(observer["Date"], '%Y-%m-%d').date()
-                if s_date > d:
-                    break
-                if s_date == d:
-                    if night["K1 PI"] == "":
-                        night["K1 PI"] += observer["Principal"]
-                        night["K1 Institution"] += observer["Institution"]
-                        night["K1 Instrument"] += observer["Instrument"]
-                    else:
-                        night["K1 PI"] += " / " + observer["Principal"]
-                        night["K1 Institution"] += " / " + observer["Institution"]
-                        night["K1 Instrument"] += " / " + observer["Instrument"]
+            if night["Date"] == observer["Date"]:
+                night["K1 PI"] += observer["Principal"]
+                night["K1 Institution"] += observer["Institution"]
+                night["K1 Instrument"] += observer["Instrument"]
+            else:
+                night["K1 PI"] += " / " + observer["Principal"]
+                night["K1 Institution"] += " / " + observer["Institution"]
+                night["K1 Instrument"] += " / " + observer["Instrument"]
         for observer in kTwo:
-                s_date = datetime.strptime(observer["Date"], '%Y-%m-%d').date()
-                if s_date > d:
-                    break
-                if s_date == d:
-                    if night["K2 PI"] == "":
-                        night["K2 PI"] += observer["Principal"]
-                        night["K2 Institution"] += observer["Institution"]
-                        night["K2 Instrument"] += observer["Instrument"]
-                    else:
-                        night["K2 PI"] += " / " + observer["Principal"]
-                        night["K2 Institution"] += " / " + observer["Institution"]
-                        night["K2 Instrument"] += " / " + observer["Instrument"]
+            if night["Date"] == observer["Date"]:
+                night["K2 PI"] += observer["Principal"]
+                night["K2 Institution"] += observer["Institution"]
+                night["K2 Instrument"] += observer["Instrument"]
+            else:
+                night["K2 PI"] += " / " + observer["Principal"]
+                night["K2 Institution"] += " / " + observer["Institution"]
+                night["K2 Instrument"] += " / " + observer["Instrument"]
 
     return(json.dumps(data))    
 
