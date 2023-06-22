@@ -208,7 +208,7 @@ def getObserversFromTelSchedule():
     kTwo = [x for x in observers if "2" in x["TelNr"]]
 
     for night in data:
-        n_date = int(d[:10])
+        n_date = int(night["Date"][:10])
         n_date = datetime.fromtimestamp(d).strftime('%Y-%m-%d')
         for observer in kOne:
             print(f'{n_date} - {observer["Date"]}')
