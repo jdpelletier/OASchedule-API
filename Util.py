@@ -180,13 +180,13 @@ def getNSFromTelSched():
                     
             schedule.append(night)
 
-    with open('data.json', 'w', encoding='utf-8') as f:
+    with open('data.json', 'w+', encoding='utf-8') as f:
         json.dump(schedule, f, ensure_ascii=False, indent=4)
 
     return(json.dumps(schedule))
 
 def getObserversFromTelSchedule():
-    with open(f) as json_file:
+    with open('data.json') as json_file:
         data = json.load(json_file)
     today = datetime.now()
     previousMonth = today-relativedelta(months=1)
