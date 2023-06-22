@@ -209,6 +209,7 @@ def getObserversFromTelSchedule():
 
     for night in data:
         for observer in kOne:
+            print(f"{night["Date"]} - {datetime.strptime(observer["Date"], '%Y-%m-%d').date()}")
             if night["Date"] == datetime.strptime(observer["Date"], '%Y-%m-%d').date():
                 night["K1 PI"] += observer["Principal"]
                 night["K1 Institution"] += observer["Institution"]
