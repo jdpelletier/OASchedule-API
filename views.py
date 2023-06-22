@@ -16,7 +16,12 @@ def update_schedule():
 @main.route('/')
 @cross_origin()
 def display_schedule():
-    return Util.readFromTelSched()
+    return Util.getNSFromTelSched()
+
+@main.route('/observers')
+@cross_origin()
+def getObservers():
+    return Util.getObserversFromTelSchedule()
 
 @main.route('/get-employee-schedule', methods=['POST'])
 @cross_origin()

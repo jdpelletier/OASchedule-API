@@ -67,7 +67,7 @@ def readFromJson(f):
 
     return json.dumps(data)
 
-def readFromTelSched():
+def getNSFromTelSched():
     today = datetime.now()
     previousMonth = today-relativedelta(months=1)
     startyear = previousMonth.year
@@ -84,13 +84,13 @@ def readFromTelSched():
     d = dates[0] + "-1"
     l = dates[3] + "-1"
     holidays = get_holidays(d, l)
-    response = requests.get(f"https://www.keck.hawaii.edu/software/db_api/telSchedule.php?cmd=getSchedule&date={d}&numdays=120")
-    observers = response.json()
-    os = []
-    for x in range(0, len(observers)):
-        os += observers[x]
-    kOne = [x for x in observers if "1" in x["TelNr"]]
-    kTwo = [x for x in observers if "2" in x["TelNr"]]
+    # response = requests.get(f"https://www.keck.hawaii.edu/software/db_api/telSchedule.php?cmd=getSchedule&date={d}&numdays=120")
+    # observers = response.json()
+    # os = []
+    # for x in range(0, len(observers)):
+    #     os += observers[x]
+    # kOne = [x for x in observers if "1" in x["TelNr"]]
+    # kTwo = [x for x in observers if "2" in x["TelNr"]]
     
     nightstaff = []
 
@@ -122,29 +122,22 @@ def readFromTelSched():
             night["Holiday"] = False
             if d in holidays:
                 night["Holiday"] = True
-            # response = requests.get(f"https://www.keck.hawaii.edu/software/db_api/telSchedule.php?cmd=getSchedule&date={d}&column=Date,Instrument,Institution,TelNr,Principal")
-            # observers = response.json()
-            # os = []
-            # for x in range(0, len(observers)):
-            #     os += observers[x]
-            # kOne = [x for x in observers if "1" in x["TelNr"]]
-            # kTwo = [x for x in observers if "2" in x["TelNr"]]
             night["K1 PI"] = ""
             night["K1 Institution"] = ""
             night["K1 Instrument"] = ""
-            for observer in kOne:
-                s_date = datetime.strptime(observer["Date"], '%Y-%m-%d').date()
-                if s_date > d:
-                    break
-                if s_date == d:
-                    if night["K1 PI"] == "":
-                        night["K1 PI"] += observer["Principal"]
-                        night["K1 Institution"] += observer["Institution"]
-                        night["K1 Instrument"] += observer["Instrument"]
-                    else:
-                        night["K1 PI"] += " / " + observer["Principal"]
-                        night["K1 Institution"] += " / " + observer["Institution"]
-                        night["K1 Instrument"] += " / " + observer["Instrument"]
+            # for observer in kOne:
+            #     s_date = datetime.strptime(observer["Date"], '%Y-%m-%d').date()
+            #     if s_date > d:
+            #         break
+            #     if s_date == d:
+            #         if night["K1 PI"] == "":
+            #             night["K1 PI"] += observer["Principal"]
+            #             night["K1 Institution"] += observer["Institution"]
+            #             night["K1 Instrument"] += observer["Instrument"]
+            #         else:
+            #             night["K1 PI"] += " / " + observer["Principal"]
+            #             night["K1 Institution"] += " / " + observer["Institution"]
+            #             night["K1 Instrument"] += " / " + observer["Instrument"]
 
             for name in oa_names:
                 night[name] = None
@@ -171,7 +164,63 @@ def readFromTelSched():
             night["K2 PI"] = ""
             night["K2 Institution"] = ""
             night["K2 Instrument"] = ""
-            for observer in kTwo:
+            # for observer in kTwo:
+            #     s_date = datetime.strptime(observer["Date"], '%Y-%m-%d').date()
+            #     if s_date > d:
+            #         break
+            #     if s_date == d:
+            #         if night["K2 PI"] == "":
+            #             night["K2 PI"] += observer["Principal"]
+            #             night["K2 Institution"] += observer["Institution"]
+            #             night["K2 Instrument"] += observer["Instrument"]
+            #         else:
+            #             night["K2 PI"] += " / " + observer["Principal"]
+            #             night["K2 Institution"] += " / " + observer["Institution"]
+            #             night["K2 Instrument"] += " / " + observer["Instrument"]
+                    
+            schedule.append(night)
+
+    with open('data.json', 'w', encoding='utf-8') as f:
+        json.dump(schedule, f, ensure_ascii=False, indent=4)
+
+    return(json.dumps(schedule))
+
+def getObserversFromTelSchedule():
+    with open(f) as json_file:
+        data = json.load(json_file)
+    today = datetime.now()
+    previousMonth = today-relativedelta(months=1)
+    startyear = previousMonth.year
+    startmonth = previousMonth.month
+    lastyear = (today+relativedelta(months=4)).year
+    lastmonth = (today+relativedelta(months=4)).month
+    dates = []
+    dates.append(previousMonth.strftime("%Y-%m"))
+    dates.append(today.strftime("%Y-%m"))
+
+    response = requests.get(f"https://www.keck.hawaii.edu/software/db_api/telSchedule.php?cmd=getSchedule&date={d}&numdays=120")
+    observers = response.json()
+    os = []
+    for x in range(0, len(observers)):
+        os += observers[x]
+    kOne = [x for x in observers if "1" in x["TelNr"]]
+    kTwo = [x for x in observers if "2" in x["TelNr"]]
+
+    for night in data:
+        for observer in kOne:
+                s_date = datetime.strptime(observer["Date"], '%Y-%m-%d').date()
+                if s_date > d:
+                    break
+                if s_date == d:
+                    if night["K1 PI"] == "":
+                        night["K1 PI"] += observer["Principal"]
+                        night["K1 Institution"] += observer["Institution"]
+                        night["K1 Instrument"] += observer["Instrument"]
+                    else:
+                        night["K1 PI"] += " / " + observer["Principal"]
+                        night["K1 Institution"] += " / " + observer["Institution"]
+                        night["K1 Instrument"] += " / " + observer["Instrument"]
+        for observer in kTwo:
                 s_date = datetime.strptime(observer["Date"], '%Y-%m-%d').date()
                 if s_date > d:
                     break
@@ -184,10 +233,8 @@ def readFromTelSched():
                         night["K2 PI"] += " / " + observer["Principal"]
                         night["K2 Institution"] += " / " + observer["Institution"]
                         night["K2 Instrument"] += " / " + observer["Instrument"]
-                    
-            schedule.append(night)
 
-    return(json.dumps(schedule))
+    return(json.dumps(data))    
 
 def exportPersonalSchedule(f, employee):
     df = pd.read_json('data.json')
