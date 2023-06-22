@@ -197,6 +197,7 @@ def getObserversFromTelSchedule():
     dates = []
     dates.append(previousMonth.strftime("%Y-%m"))
     dates.append(today.strftime("%Y-%m"))
+    d = dates[0] + "-1"
 
     response = requests.get(f"https://www.keck.hawaii.edu/software/db_api/telSchedule.php?cmd=getSchedule&date={d}&numdays=120")
     observers = response.json()
