@@ -209,7 +209,7 @@ def getObserversFromTelSchedule():
 
     for night in data:
         n_date = int(str(night["Date"])[:10])
-        n_date = datetime.fromtimestamp(d).strftime('%Y-%m-%d')
+        n_date = datetime.fromtimestamp(n_date).strftime('%Y-%m-%d')
         for observer in kOne:
             print(f'{n_date} - {observer["Date"]}')
             if n_date == datetime.strptime(observer["Date"], '%Y-%m-%d').date():
