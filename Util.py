@@ -217,10 +217,10 @@ def getObserversFromTelSchedule():
                         night["K1 PI"] += observer["Principal"]
                         night["K1 Institution"] += observer["Institution"]
                         night["K1 Instrument"] += observer["Instrument"]
-                    else:
-                        night["K1 PI"] += " / " + observer["Principal"]
-                        night["K1 Institution"] += " / " + observer["Institution"]
-                        night["K1 Instrument"] += " / " + observer["Instrument"]
+                else:
+                    night["K1 PI"] += " / " + observer["Principal"]
+                    night["K1 Institution"] += " / " + observer["Institution"]
+                    night["K1 Instrument"] += " / " + observer["Instrument"]
 
         for observer in kTwo:
             if n_date == observer["Date"]:
@@ -228,10 +228,10 @@ def getObserversFromTelSchedule():
                         night["K2 PI"] += observer["Principal"]
                         night["K2 Institution"] += observer["Institution"]
                         night["K2 Instrument"] += observer["Instrument"]
-                    else:
-                        night["K2 PI"] += " / " + observer["Principal"]
-                        night["K2 Institution"] += " / " + observer["Institution"]
-                        night["K2 Instrument"] += " / " + observer["Instrument"]
+                else:
+                    night["K2 PI"] += " / " + observer["Principal"]
+                    night["K2 Institution"] += " / " + observer["Institution"]
+                    night["K2 Instrument"] += " / " + observer["Instrument"]
 
 
     return(json.dumps(data))    
