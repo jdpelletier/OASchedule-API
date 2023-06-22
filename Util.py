@@ -208,14 +208,15 @@ def getObserversFromTelSchedule():
     kTwo = [x for x in observers if "2" in x["TelNr"]]
 
     for night in data:
+        n_date = datetime.strptime(str(night["Date"]), "%Y-%m-%d").date()
         for observer in kOne:
-            print(f'{datetime.strptime(night["Date"], "%Y-%m-%d").date()} - {observer["Date"]}')
-            if night["Date"] == datetime.strptime(observer["Date"], '%Y-%m-%d').date():
+            print(f'{n_date} - {observer["Date"]}')
+            if n_date == datetime.strptime(observer["Date"], '%Y-%m-%d').date():
                 night["K1 PI"] += observer["Principal"]
                 night["K1 Institution"] += observer["Institution"]
                 night["K1 Instrument"] += observer["Instrument"]
         for observer in kTwo:
-            if datetime.strptime(night["Date"], "%Y-%m-%d").date() == observer["Date"]:
+            if n_date == observer["Date"]:
                 night["K2 PI"] += observer["Principal"]
                 night["K2 Institution"] += observer["Institution"]
                 night["K2 Instrument"] += observer["Instrument"]
