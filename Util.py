@@ -11,6 +11,7 @@ import pymysql.cursors
 def writeToJson(f):
 
     df = pd.read_excel(f)
+    print(df)
 
     df.dropna(subset=["Date"], inplace=True)
     df = df[df.filter(regex='^(?!Unnamed)').columns]
