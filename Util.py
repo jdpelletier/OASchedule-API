@@ -11,8 +11,6 @@ import pymysql.cursors
 def writeToJson(f):
 
     df = pd.read_excel(f)
-    print(df)
-
     df.dropna(subset=["Date"], inplace=True)
     df = df[df.filter(regex='^(?!Unnamed)').columns]
 
@@ -35,6 +33,7 @@ def writeToJson(f):
     df = df[~(df['Date'] == 'L')]
     df = df[~(df['Date'] == 'H')]
 
+    df['Date'] = pd.to_datetime(df.Date, format='%Y-%m-%d')
     df['Date'] = df['Date'].dt.tz_localize(timezone(timedelta(hours=-10))) #convert to HST
 
     df.rename(columns={'Institution':'K1 PI'}, inplace=True)
