@@ -84,13 +84,6 @@ def getNSFromTelSched():
     d = dates[0] + "-1"
     l = dates[3] + "-1"
     holidays = get_holidays(d, l)
-    # response = requests.get(f"https://www.keck.hawaii.edu/software/db_api/telSchedule.php?cmd=getSchedule&date={d}&numdays=120")
-    # observers = response.json()
-    # os = []
-    # for x in range(0, len(observers)):
-    #     os += observers[x]
-    # kOne = [x for x in observers if "1" in x["TelNr"]]
-    # kTwo = [x for x in observers if "2" in x["TelNr"]]
     
     nightstaff = []
 
@@ -120,6 +113,9 @@ def getNSFromTelSched():
             night["Holiday"] = ""
             if str(d.strftime('%Y-%m-%d')) in holidays:
                 night["Holiday"] = "X"
+            night["Pay"] = ""
+            if isPaySunday(d.strftime('%Y-%m-%d')):
+                night["Pay"] = "X"
             night["K1 PI"] = ""
             night["K1 Institution"] = ""
             night["K1 Instrument"] = ""
@@ -289,3 +285,10 @@ def get_holidays(startdate, enddate):
         holidays.append(entry['date'].strftime('%Y-%m-%d'))
 
     return holidays
+
+def isPaySunday(date):
+    base = datetime.date(2022, 1, 2)
+    d = (base-date).days%14
+    if d ==0:
+        return True
+    return False
