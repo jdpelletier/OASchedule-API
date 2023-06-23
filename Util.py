@@ -118,7 +118,7 @@ def getNSFromTelSched():
             night["Date"] = datetime.fromtimestamp(time.mktime(d.timetuple())).timestamp()*1000
             night["DOW"] = d.strftime('%A')[:3]
             night["Holiday"] = False
-            if d in holidays:
+            if d.strftime('%Y-%m-%d') in holidays:
                 night["Holiday"] = True
             night["K1 PI"] = ""
             night["K1 Institution"] = ""
@@ -287,7 +287,5 @@ def get_holidays(startdate, enddate):
     holidays = []
     for entry in entries:
         holidays.append(entry['date'].strftime('%Y-%m-%d'))
-    
-    print(holidays)
 
     return holidays
