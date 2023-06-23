@@ -1,5 +1,5 @@
 import pandas as pd
-from datetime import timezone, datetime, timedelta
+from datetime import timezone, datetime, timedelta, date
 import json
 import requests
 from dateutil.relativedelta import relativedelta
@@ -286,9 +286,9 @@ def get_holidays(startdate, enddate):
 
     return holidays
 
-def isPaySunday(date):
-    base = datetime.date(2022, 1, 2)
-    d = (base-date).days%14
+def isPaySunday(d):
+    base = date(2022, 1, 2)
+    d = (base-d).days%14
     if d ==0:
         return True
     return False
