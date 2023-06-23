@@ -110,8 +110,6 @@ def getNSFromTelSched():
         if name not in oa_names:
             oa_names.append(name)
 
-   
-    ##TODO finish adding observer stuff
 
     schedule = []
     for i in range(startmonth,lastmonth):
@@ -290,5 +288,7 @@ def get_holidays(startdate, enddate):
     holidays = []
     for entry in entries:
         holidays.append(entry['date'].strftime('%Y-%m-%d'))
+    
+    print(holidays)
 
     return holidays
