@@ -114,7 +114,7 @@ def getNSFromTelSched():
             if str(d.strftime('%Y-%m-%d')) in holidays:
                 night["Holiday"] = "X"
             night["Pay"] = ""
-            if isPaySunday(d.strftime('%Y-%m-%d')):
+            if isPaySunday(d):
                 night["Pay"] = "X"
             night["K1 PI"] = ""
             night["K1 Institution"] = ""
