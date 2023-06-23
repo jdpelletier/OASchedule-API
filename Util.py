@@ -36,8 +36,8 @@ def writeToJson(f):
 
     df['Date'] = df['Date'].dt.tz_localize(timezone(timedelta(hours=-10))) #convert to HST
 
-    df.rename(columns={'Institution':'Institution:K1'}, inplace=True)
-    df.rename(columns={'Institution.1':'Institution:K2'}, inplace=True)
+    df.rename(columns={'Institution':'K1 PI'}, inplace=True)
+    df.rename(columns={'Institution.1':'K2 PI'}, inplace=True)
 
     for col in df:
         if '.' in col:

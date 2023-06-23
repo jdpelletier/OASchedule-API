@@ -10,13 +10,14 @@ main = Blueprint('main', __name__)
 def update_schedule():
     f = request.files['file']
     status = Util.writeToJson(f)
+    print(status)
     return Util.readFromJson('data.json')
 
-###New, read from tel schedule
 @main.route('/')
 @cross_origin()
 def display_schedule():
-    return Util.getNSFromTelSched()
+    return Util.readFromJson()
+    #return Util.getNSFromTelSched()
 
 @main.route('/observers')
 @cross_origin()
