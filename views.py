@@ -16,8 +16,8 @@ def update_schedule():
 @main.route('/')
 @cross_origin()
 def display_schedule():
-    return Util.readFromJson()
-    #return Util.getNSFromTelSched()
+    # return Util.readFromJson('data.json')
+    return Util.getNSFromTelSched()
 
 @main.route('/observers')
 @cross_origin()
