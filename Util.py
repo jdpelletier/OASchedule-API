@@ -119,7 +119,7 @@ def getNSFromTelSched():
             night["DOW"] = d.strftime('%A')[:3]
             night["Holiday"] = ""
             if str(d.strftime('%Y-%m-%d')) in holidays:
-                night["Holiday"] = "x"
+                night["Holiday"] = "X"
             night["K1 PI"] = ""
             night["K1 Institution"] = ""
             night["K1 Instrument"] = ""
