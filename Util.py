@@ -52,6 +52,7 @@ def writeToJson(f):
         if col == 'K1 Instrument':
             search = True
 
+    df.reset_index(inplace=True)
     df = df.to_json(orient='records')
     parsed = json.loads(df)
 
