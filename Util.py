@@ -33,8 +33,8 @@ def writeToJson(f):
     df = df[~(df['Date'] == 'L')]
     df = df[~(df['Date'] == 'H')]
 
-    df['Date'] = pd.to_datetime(df.Date, format='%Y-%m-%d')
-    df['Date'] = df['Date'].dt.tz_localize(timezone(timedelta(hours=-10))) #convert to HST
+    # df['Date'] = pd.to_datetime(df.Date, format='%Y-%m-%d')
+    # df['Date'] = df['Date'].dt.tz_localize(timezone(timedelta(hours=-10))) #convert to HST
 
     df.rename(columns={'Institution':'K1 PI'}, inplace=True)
     df.rename(columns={'Institution.1':'K2 PI'}, inplace=True)
