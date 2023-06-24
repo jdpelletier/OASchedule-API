@@ -40,7 +40,7 @@ def writeToJson(f):
     df.rename(columns={'Institution.1':'K2 Institution'}, inplace=True)
     df.rename(columns={'K2 PI last':'K2 PI'}, inplace=True)
 
-    hol = get_holidays(df.loc['Date'][0], df.loc['Date'][-1])
+    hol = get_holidays(df.loc[0]['Date'], df.loc[-1]['Date'])
     h_rows = df.loc[df['Date'].isin(hol)]
     print(h_rows)
 
