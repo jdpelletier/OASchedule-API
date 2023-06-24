@@ -38,7 +38,7 @@ def writeToJson(f):
 
     df.rename(columns={'Institution':'K1 Institution'}, inplace=True)
     df.rename(columns={'Institution.1':'K2 Institution'}, inplace=True)
-    df.rename(columns={'K2 PI Last':'K2 PI'}, inplace=True)
+    df.rename(columns={'K2 PI last':'K2 PI'}, inplace=True)
 
     for col in df:
         if '.' in col:
