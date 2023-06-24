@@ -44,8 +44,6 @@ def writeToJson(f):
     h_rows = df.loc[df['Date'].isin(hol)]
     print(h_rows)
 
-    for 
-
     for col in df:
         if '.' in col:
             df = df.drop(col, 1)
