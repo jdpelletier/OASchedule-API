@@ -268,6 +268,7 @@ def exportPersonalSchedule(f, employee):
 
 
 def get_holidays(startdate, enddate):
+    print(f"{startdate}, {enddate}")
     """
     Returns any scheduled holidays for the time period
     """
