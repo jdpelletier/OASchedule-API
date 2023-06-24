@@ -40,6 +40,12 @@ def writeToJson(f):
     df.rename(columns={'Institution.1':'K2 Institution'}, inplace=True)
     df.rename(columns={'K2 PI last':'K2 PI'}, inplace=True)
 
+    hol = get_holidays(df.iloc['Date'][0], df.iloc['Date'][-1])
+    h_rows = df.loc[df['Date'].isin(hol)]
+    print(h_rows)
+
+    for 
+
     for col in df:
         if '.' in col:
             df = df.drop(col, 1)
