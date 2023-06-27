@@ -43,8 +43,8 @@ def writeToJson(f):
     #TODO get holidays and payperiods working here
     hol = get_holidays(list(df['Date'].values[:1])[0], list(df['Date'].values[-1:])[0])
     # hol = get_holidays(datetime.strptime(str(df['Date'].values[:1])[2:12], '%Y-%m-%d').date(), datetime.strptime(str(df['Date'].values[-1:])[2:12], '%Y-%m-%d').date())
-    print(hol)
     hol_dates = [datetime.strptime(h, '%Y-%m-%d').date() for h in hol]
+    print(hol_dates)
     h_rows = df.loc[df['Date'].isin(hol_dates)]
     print(h_rows)
 
