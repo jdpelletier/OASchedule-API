@@ -40,19 +40,15 @@ def writeToJson(f):
     df.rename(columns={'Institution.1':'K2 Institution'}, inplace=True)
     df.rename(columns={'K2 PI last':'K2 PI'}, inplace=True)
 
-    holiday_holder = []
+    holder = []
     for row in range(0, df.shape[0]):
-        holiday_holder.append("")
+        holder.append("")
     
-    df['Holiday'] = holiday_holder
+    df['Holiday'] = holder
 
-    #TODO get holidays and payperiods working here
     hol = get_holidays(list(df['Date'].values[:1])[0], list(df['Date'].values[-1:])[0])
-    # hol = get_holidays(datetime.strptime(str(df['Date'].values[:1])[2:12], '%Y-%m-%d').date(), datetime.strptime(str(df['Date'].values[-1:])[2:12], '%Y-%m-%d').date())
     hol_dates = [h+" 00:00:00-10:00" for h in hol]
-    # hol_dates = [datetime.strptime(h, '%Y-%m-%d ').date() for h in hol]
     df.loc[df['Date'].isin(hol_dates), 'Holiday'] = 'X'
-    print(df['Holiday'])
 
     for col in df:
         if '.' in col:
@@ -128,9 +124,6 @@ def getNSFromTelSched():
             night["Holiday"] = ""
             if str(d.strftime('%Y-%m-%d')) in holidays:
                 night["Holiday"] = "X"
-            night["Pay"] = ""
-            if isPaySunday(d):
-                night["Pay"] = "X"
             night["K1 PI"] = ""
             night["K1 Institution"] = ""
             night["K1 Instrument"] = ""
@@ -301,9 +294,3 @@ def get_holidays(startdate, enddate):
 
     return holidays
 
-def isPaySunday(d):
-    base = date(2022, 1, 2)
-    d = (base-d).days%14
-    if d ==0:
-        return True
-    return False
