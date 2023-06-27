@@ -55,7 +55,8 @@ def writeToJson(f):
     print(h_rows)
 
     for row in h_rows:
-        row['Holiday'] = 'X'
+        print(row)
+        # row['Holiday'] = 'X'
 
     for col in df:
         if '.' in col:
