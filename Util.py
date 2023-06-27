@@ -45,7 +45,7 @@ def writeToJson(f):
     # hol = get_holidays(datetime.strptime(str(df['Date'].values[:1])[2:12], '%Y-%m-%d').date(), datetime.strptime(str(df['Date'].values[-1:])[2:12], '%Y-%m-%d').date())
     hol_dates = [datetime.strptime(h, '%Y-%m-%d ').date() for h in hol]
     print(hol_dates)
-    print(df['Date'].to_datetime)
+    print(df['Date'].date)
     h_rows = df.loc[df['Date'].isin(hol_dates)]
     print(h_rows)
 
