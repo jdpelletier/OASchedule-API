@@ -40,14 +40,22 @@ def writeToJson(f):
     df.rename(columns={'Institution.1':'K2 Institution'}, inplace=True)
     df.rename(columns={'K2 PI last':'K2 PI'}, inplace=True)
 
+    holiday_holder = []
+    for row in range(0, df.shape[0]):
+        holiday_holder.append("")
+    
+    df['Holiday'] = holiday_holder
+
     #TODO get holidays and payperiods working here
     hol = get_holidays(list(df['Date'].values[:1])[0], list(df['Date'].values[-1:])[0])
     # hol = get_holidays(datetime.strptime(str(df['Date'].values[:1])[2:12], '%Y-%m-%d').date(), datetime.strptime(str(df['Date'].values[-1:])[2:12], '%Y-%m-%d').date())
     hol_dates = [h+" 00:00:00-10:00" for h in hol]
     # hol_dates = [datetime.strptime(h, '%Y-%m-%d ').date() for h in hol]
-    print(hol_dates)
     h_rows = df.loc[df['Date'].isin(hol_dates)]
     print(h_rows)
+
+    for row in h_rows:
+        row['Holiday'] = 'X'
 
     for col in df:
         if '.' in col:
