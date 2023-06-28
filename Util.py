@@ -117,13 +117,13 @@ def getNSFromTelSched(range):
     #     data = response.json()
     #     nightstaff.append(data)     
     
-    print(nightstaff)
+    print(nightstaff[0])
     ns = []
     for x in range(0, len(nightstaff)):
         ns += nightstaff[x]
 
     oa_names = []
-    for n in oas:
+    for n in nightstaff:
         name = n["FirstName"][0] + n["LastName"][0]
         if name not in oa_names:
             oa_names.append(name)
