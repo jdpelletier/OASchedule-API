@@ -88,13 +88,10 @@ def getNSFromTelSched(range):
     current_date = datetime.strptime(start, '%Y-%m-%d').date()
     last_date = datetime.strptime(end, '%Y-%m-%d').date()
     while current_date <= last_date:
-        print(current_date)
         response = requests.get(f"https://www.keck.hawaii.edu/software/db_api/telSchedule.php?cmd=getNightStaff&date={current_date}&type=oa")
         data = response.json()
         nightstaff.append(data)
         current_date += timedelta(days=1)
-
-    print(nightstaff)
 
     # today = datetime.now()
     # previousMonth = today-relativedelta(months=1)
@@ -120,13 +117,13 @@ def getNSFromTelSched(range):
     #     data = response.json()
     #     nightstaff.append(data)     
     
-    ns = []
-    for x in range(0, len(nightstaff)):
-        ns += nightstaff[x]
+    # ns = []
+    # for x in range(0, len(nightstaff)):
+    #     ns += nightstaff[x]
 
-    oas = [x for x in ns if "oa" in x["Type"]]
+    # oas = [x for x in ns if "oa" in x["Type"]]
     oa_names = []
-    for n in oas:
+    for n in nightstaff:
         name = n["FirstName"][0] + n["LastName"][0]
         if name not in oa_names:
             oa_names.append(name)
