@@ -134,6 +134,7 @@ def getNSFromTelSched(range):
     schedule = []
     current_date = datetime.strptime(start, '%Y-%m-%d').date()
     while current_date <= last_date:
+        night = {}
         night["Date"] = datetime.fromtimestamp(time.mktime(current_date.timetuple())).timestamp()*1000
         night["DOW"] = current_date.strftime('%A')[:3]
         night["Holiday"] = ""
