@@ -132,6 +132,45 @@ def getNSFromTelSched(range):
 
 
     schedule = []
+    current_date = datetime.strptime(start, '%Y-%m-%d').date()
+    while current_date <= last_date:
+        night["Date"] = datetime.fromtimestamp(time.mktime(current_date.timetuple())).timestamp()*1000
+        night["DOW"] = current_date.strftime('%A')[:3]
+        night["Holiday"] = ""
+        if str(current_date.strftime('%Y-%m-%d')) in holidays:
+            night["Holiday"] = "X"
+        night["K1 PI"] = ""
+        night["K1 Institution"] = ""
+        night["K1 Instrument"] = ""
+        for name in oa_names:
+                night[name] = None
+
+            people = 0
+            for staff in oas:
+                s_date = datetime.strptime(staff["Date"], '%Y-%m-%d').date()
+                if s_date > current_date:
+                    break
+                if s_date == current_date:
+                    name = staff["FirstName"][0] + staff["LastName"][0]
+                    shift = staff["Type"].upper()
+                    if "R" in shift:
+                        tel = "R" + staff["TelNr"]
+                        night[name] = shift.replace("OAR", tel)
+                        people += 1
+                    else:
+                        tel = "K" + staff["TelNr"]
+                        night[name] = shift.replace("OA", tel)
+                        people += 1
+            if people == 0:
+                break
+
+            night["K2 PI"] = ""
+            night["K2 Institution"] = ""
+            night["K2 Instrument"] = ""
+                    
+            schedule.append(night)
+
+
     for i in range(startmonth,lastmonth):
         for d in [x for x in Calendar().itermonthdates(startyear, i) if x.month == i]: #todo add checks for different years
             night = {}
