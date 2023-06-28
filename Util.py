@@ -81,15 +81,12 @@ def readFromJson(f):
 def getNSFromTelSched(range):
     start = datetime.fromtimestamp(range['Start']/1000).strftime('%Y-%m-%d')
     end = datetime.fromtimestamp(range['End']/1000).strftime('%Y-%m-%d')
-    print(f"{start}, {end}")
 
     holidays = get_holidays(start, end)
-
-    print(holidays)
     
     nightstaff = []
     current_date = range['Start']
-    while current_date >= range['End']:
+    while current_date <= range['End']:
         response = requests.get(f"https://www.keck.hawaii.edu/software/db_api/telSchedule.php?cmd=getNightStaff&date={current_date}&type=oa")
         data = response.json()
         nightstaff.append(data)
