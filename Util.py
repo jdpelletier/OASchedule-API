@@ -147,23 +147,24 @@ def getNSFromTelSched(range):
                 night[name] = None
 
         people = 0
-        for staff in nightstaff:
-            s_date = datetime.strptime(staff["Date"], '%Y-%m-%d').date()
-            if s_date > current_date:
+        for staff in night:
+            for oa in staff:
+                s_date = datetime.strptime(oa["Date"], '%Y-%m-%d').date()
+                if s_date > current_date:
+                    break
+                if s_date == current_date:
+                    name = oa["FirstName"][0] + oa["LastName"][0]
+                    shift = oa["Type"].upper()
+                    if "R" in shift:
+                        tel = "R" + oa["TelNr"]
+                        night[name] = shift.replace("OAR", tel)
+                        people += 1
+                    else:
+                        tel = "K" + oa["TelNr"]
+                        night[name] = shift.replace("OA", tel)
+                        people += 1
+            if people == 0:
                 break
-            if s_date == current_date:
-                name = staff["FirstName"][0] + staff["LastName"][0]
-                shift = staff["Type"].upper()
-                if "R" in shift:
-                    tel = "R" + staff["TelNr"]
-                    night[name] = shift.replace("OAR", tel)
-                    people += 1
-                else:
-                    tel = "K" + staff["TelNr"]
-                    night[name] = shift.replace("OA", tel)
-                    people += 1
-        if people == 0:
-            break
 
         night["K2 PI"] = ""
         night["K2 Institution"] = ""
