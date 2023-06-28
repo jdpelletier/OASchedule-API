@@ -145,31 +145,31 @@ def getNSFromTelSched(range):
         for name in oa_names:
                 night[name] = None
 
-            people = 0
-            for staff in oas:
-                s_date = datetime.strptime(staff["Date"], '%Y-%m-%d').date()
-                if s_date > current_date:
-                    break
-                if s_date == current_date:
-                    name = staff["FirstName"][0] + staff["LastName"][0]
-                    shift = staff["Type"].upper()
-                    if "R" in shift:
-                        tel = "R" + staff["TelNr"]
-                        night[name] = shift.replace("OAR", tel)
-                        people += 1
-                    else:
-                        tel = "K" + staff["TelNr"]
-                        night[name] = shift.replace("OA", tel)
-                        people += 1
-            if people == 0:
+        people = 0
+        for staff in oas:
+            s_date = datetime.strptime(staff["Date"], '%Y-%m-%d').date()
+            if s_date > current_date:
                 break
+            if s_date == current_date:
+                name = staff["FirstName"][0] + staff["LastName"][0]
+                shift = staff["Type"].upper()
+                if "R" in shift:
+                    tel = "R" + staff["TelNr"]
+                    night[name] = shift.replace("OAR", tel)
+                    people += 1
+                else:
+                    tel = "K" + staff["TelNr"]
+                    night[name] = shift.replace("OA", tel)
+                    people += 1
+        if people == 0:
+            break
 
-            night["K2 PI"] = ""
-            night["K2 Institution"] = ""
-            night["K2 Instrument"] = ""
-                    
-            schedule.append(night)
-            current_date += timedelta(days=1)
+        night["K2 PI"] = ""
+        night["K2 Institution"] = ""
+        night["K2 Instrument"] = ""
+                
+        schedule.append(night)
+        current_date += timedelta(days=1)
 
 
     for i in range(startmonth,lastmonth):
