@@ -80,6 +80,8 @@ def readFromJson(f):
 
 def getNSFromTelSched(range):
 
+    print(range)
+
     holidays = get_holidays(range['Start'], range['End'])
     
     nightstaff = []
