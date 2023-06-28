@@ -85,7 +85,7 @@ def getNSFromTelSched(range):
     holidays = get_holidays(start, end)
     
     nightstaff = []
-    current_date = datetime.strptime(start, '%Y-%m-%d')
+    current_date = datetime.strptime(start, '%Y-%m-%d').date()
     last_date = datetime.strptime(end, '%Y-%m-%d').date()
     while current_date <= last_date:
         print(current_date)
