@@ -297,5 +297,5 @@ def get_holidays(startdate, enddate):
 def last_day(file):
     with open(file) as f:
         j = json.load(f)
-        return j[-1]['Date']
+        return json.dumps(j[-1]['Date'])
 
