@@ -22,7 +22,7 @@ def display_schedule():
 @main.route('/nightstaff', methods=['POST'])
 @cross_origin()
 def getNightStaff():
-    return return Util.getNSFromTelSched(request.get_json())
+    return Util.getNSFromTelSched(request.get_json())
 
 @main.route('/observers', methods=['POST'])
 @cross_origin()
