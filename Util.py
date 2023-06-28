@@ -79,8 +79,8 @@ def readFromJson(f):
     return json.dumps(data)
 
 def getNSFromTelSched(range):
-    start = datetime.fromtimestamp(range['Start']).strftime('%Y-%m-%d')
-    end = datetime.fromtimestamp(range['End']).strftime('%Y-%m-%d')
+    start = datetime.fromtimestamp(range['Start']/1000).strftime('%Y-%m-%d')
+    end = datetime.fromtimestamp(range['End']/1000).strftime('%Y-%m-%d')
     print(f"{start}, {end}")
 
     holidays = get_holidays(start, end)
