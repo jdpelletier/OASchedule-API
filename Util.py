@@ -250,18 +250,15 @@ def getNSFromTelSched(range):
 def getObserversFromTelSchedule(range):
     with open('data.json') as json_file:
         data = json.load(json_file)
-    today = datetime.now()
-    previousMonth = today-relativedelta(months=1)
-    startyear = previousMonth.year
-    startmonth = previousMonth.month
-    lastyear = (today+relativedelta(months=4)).year
-    lastmonth = (today+relativedelta(months=4)).month
-    dates = []
-    dates.append(previousMonth.strftime("%Y-%m"))
-    dates.append(today.strftime("%Y-%m"))
-    d = dates[0] + "-1"
 
-    response = requests.get(f"https://www.keck.hawaii.edu/software/db_api/telSchedule.php?cmd=getSchedule&date={d}&numdays=120")
+    start = datetime.fromtimestamp(range['Start']/1000).strftime('%Y-%m-%d')
+    end = datetime.fromtimestamp(range['End']/1000).strftime('%Y-%m-%d')
+    first_date = datetime.strptime(start, '%Y-%m-%d').date()
+    last_date = datetime.strptime(end, '%Y-%m-%d').date()
+    delta_days = (last_date-current_date).days()
+    if delta_days > 120:
+        delta_days = 120
+    response = requests.get(f"https://www.keck.hawaii.edu/software/db_api/telSchedule.php?cmd=getSchedule&date={first_date}&numdays={delta_days}")
     observers = response.json()
     os = []
     for x in range(0, len(observers)):
