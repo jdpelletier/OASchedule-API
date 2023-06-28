@@ -90,6 +90,8 @@ def getNSFromTelSched(range):
         nightstaff.append(data)
         current_date += datetime.timedelta(days=1)
 
+    print(nightstaff)
+
     # today = datetime.now()
     # previousMonth = today-relativedelta(months=1)
     # startyear = previousMonth.year
@@ -198,7 +200,7 @@ def getNSFromTelSched(range):
 
     return(json.dumps(schedule))
 
-def getObserversFromTelSchedule():
+def getObserversFromTelSchedule(range):
     with open('data.json') as json_file:
         data = json.load(json_file)
     today = datetime.now()
