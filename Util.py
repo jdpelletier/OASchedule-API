@@ -78,30 +78,41 @@ def readFromJson(f):
 
     return json.dumps(data)
 
-def getNSFromTelSched():
-    today = datetime.now()
-    previousMonth = today-relativedelta(months=1)
-    startyear = previousMonth.year
-    startmonth = previousMonth.month
-    lastyear = (today+relativedelta(months=4)).year
-    lastmonth = (today+relativedelta(months=4)).month
-    dates = []
-    dates.append(previousMonth.strftime("%Y-%m"))
-    dates.append(today.strftime("%Y-%m"))
-    for i in range(1,4):
-        day = today+relativedelta(months=i)
-        dates.append(day.strftime("%Y-%m"))
+def getNSFromTelSched(range):
 
-    d = dates[0] + "-1"
-    l = dates[3] + "-1"
-    holidays = get_holidays(d, l)
+    holidays = get_holidays(range['Start'], range['End'])
     
     nightstaff = []
-
-    for d in dates:
-        response = requests.get(f"https://www.keck.hawaii.edu/software/db_api/telSchedule.php?cmd=getNightStaff&date={d}")
+    current_date = range['Start']
+    while current_date >= range['End']:
+        response = requests.get(f"https://www.keck.hawaii.edu/software/db_api/telSchedule.php?cmd=getNightStaff&date={current_date}&type=oa")
         data = response.json()
-        nightstaff.append(data)     
+        nightstaff.append(data)
+        current_date += datetime.timedelta(days=1)
+
+    # today = datetime.now()
+    # previousMonth = today-relativedelta(months=1)
+    # startyear = previousMonth.year
+    # startmonth = previousMonth.month
+    # lastyear = (today+relativedelta(months=4)).year
+    # lastmonth = (today+relativedelta(months=4)).month
+    # dates = []
+    # dates.append(previousMonth.strftime("%Y-%m"))
+    # dates.append(today.strftime("%Y-%m"))
+    # for i in range(1,4):
+    #     day = today+relativedelta(months=i)
+    #     dates.append(day.strftime("%Y-%m"))
+
+    # d = dates[0] + "-1"
+    # l = dates[3] + "-1"
+    # holidays = get_holidays(d, l)
+    
+    # nightstaff = []
+
+    # for d in dates:
+    #     response = requests.get(f"https://www.keck.hawaii.edu/software/db_api/telSchedule.php?cmd=getNightStaff&date={d}&type=oa")
+    #     data = response.json()
+    #     nightstaff.append(data)     
     
     ns = []
     for x in range(0, len(nightstaff)):

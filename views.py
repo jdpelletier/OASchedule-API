@@ -19,10 +19,15 @@ def display_schedule():
     return Util.readFromJson('data.json')
     # return Util.getNSFromTelSched()
 
-@main.route('/observers')
+@main.route('/nightstaff', methods=['POST'])
+@cross_origin()
+def getNightStaff():
+    return return Util.getNSFromTelSched(request.get_json())
+
+@main.route('/observers', methods=['POST'])
 @cross_origin()
 def getObservers():
-    return Util.getObserversFromTelSchedule()
+    return Util.getObserversFromTelSchedule(request.get_json())
 
 @main.route('/get-employee-schedule', methods=['POST'])
 @cross_origin()
