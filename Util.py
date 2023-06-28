@@ -90,7 +90,7 @@ def getNSFromTelSched(range):
         response = requests.get(f"https://www.keck.hawaii.edu/software/db_api/telSchedule.php?cmd=getNightStaff&date={current_date}&type=oa")
         data = response.json()
         nightstaff.append(data)
-        current_date += datetime.timedelta(days=1)
+        current_date += timedelta(days=1)
 
     print(nightstaff)
 
