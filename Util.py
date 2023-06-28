@@ -84,6 +84,8 @@ def getNSFromTelSched(range):
     print(f"{start}, {end}")
 
     holidays = get_holidays(start, end)
+
+    print(holidays)
     
     nightstaff = []
     current_date = range['Start']
