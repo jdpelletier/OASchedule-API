@@ -32,3 +32,8 @@ def getEmployeeSchedule():
         return send_file(Util.exportPersonalSchedule('data.json', emp["employee"]), attachment_filename=f'{emp["employee"]}.csv', as_attachment=True)
     except Exception as e:
         return str(e)
+
+@main.route('/last_day')
+@cross_origin()
+def get_last_day():
+    return Util.last_day('data.json')
