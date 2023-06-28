@@ -79,10 +79,11 @@ def readFromJson(f):
     return json.dumps(data)
 
 def getNSFromTelSched(range):
+    start = datetime.fromtimestamp(range['Start']).strftime('%Y-%m-%d')
+    end = datetime.fromtimestamp(range['End']).strftime('%Y-%m-%d')
+    print(f"{start}, {end}")
 
-    print(range)
-
-    holidays = get_holidays(range['Start'], range['End'])
+    holidays = get_holidays(start, end)
     
     nightstaff = []
     current_date = range['Start']
