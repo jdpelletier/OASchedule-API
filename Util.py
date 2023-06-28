@@ -85,7 +85,7 @@ def getNSFromTelSched(range):
     holidays = get_holidays(start, end)
     
     nightstaff = []
-    current_date = range['Start']
+    current_date = start
     while current_date <= range['End']:
         response = requests.get(f"https://www.keck.hawaii.edu/software/db_api/telSchedule.php?cmd=getNightStaff&date={current_date}&type=oa")
         data = response.json()
