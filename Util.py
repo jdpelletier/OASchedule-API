@@ -148,13 +148,11 @@ def getNSFromTelSched(range):
 
         people = 0
         for staff in nightstaff:
-            print(staff)
             s_date = datetime.strptime(staff[0]["Date"], '%Y-%m-%d').date()
             if s_date > current_date:
                 break
             if s_date == current_date:
                 for oa in staff:
-                    print(oa)
                     name = oa["FirstName"][0] + oa["LastName"][0]
                     shift = oa["Type"].upper()
                     if "R" in shift:
