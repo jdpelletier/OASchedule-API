@@ -124,6 +124,7 @@ def getNSFromTelSched(range):
     #TODO, get rid of nested loop
     oa_names = []
     for night in nightstaff:
+        print(night)
         for oa in range(len(night)):
             name = night[oa]["FirstName"] + night[oa]["LastName"] 
         # name = n["FirstName"][0] + n["LastName"][0]
