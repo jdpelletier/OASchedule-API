@@ -169,6 +169,7 @@ def getNSFromTelSched(range):
             night["K2 Instrument"] = ""
                     
             schedule.append(night)
+            current_date += timedelta(days=1)
 
 
     for i in range(startmonth,lastmonth):
