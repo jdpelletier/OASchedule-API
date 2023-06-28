@@ -258,7 +258,7 @@ def getObserversFromTelSchedule(range):
         delta_days = 120
     response = requests.get(f"https://www.keck.hawaii.edu/software/db_api/telSchedule.php?cmd=getSchedule&date={first_date}&numdays={delta_days}")
     observers = response.json()
-
+    
     kOne = [x for x in observers if "1" in x["TelNr"]]
     kTwo = [x for x in observers if "2" in x["TelNr"]]
 
@@ -350,5 +350,5 @@ def get_holidays(startdate, enddate):
 def last_day(file):
     with open(file) as f:
         j = json.load(f)
-        return json.dumps(j[0]['Date'])
+        return json.dumps(j[-1]['Date'])
 
