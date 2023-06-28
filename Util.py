@@ -86,7 +86,7 @@ def getNSFromTelSched(range):
     
     nightstaff = []
     current_date = start
-    while current_date <= range['End']:
+    while current_date <= end:
         response = requests.get(f"https://www.keck.hawaii.edu/software/db_api/telSchedule.php?cmd=getNightStaff&date={current_date}&type=oa")
         data = response.json()
         nightstaff.append(data)
