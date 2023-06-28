@@ -125,7 +125,7 @@ def getNSFromTelSched(range):
     oa_names = []
     for night in nightstaff:
         for oa in night:
-            name = oa["FirstName"] + oa["LastName"] 
+            name = oa["FirstName"][0] + oa["LastName"][0]
         # name = n["FirstName"][0] + n["LastName"][0]
         if name not in oa_names:
             oa_names.append(name)
