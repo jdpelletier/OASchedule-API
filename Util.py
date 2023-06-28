@@ -147,7 +147,7 @@ def getNSFromTelSched(range):
                 night[name] = None
 
         people = 0
-        for staff in night:
+        for staff in nightstaff:
             print(staff)
             s_date = datetime.strptime(staff[0]["Date"], '%Y-%m-%d').date()
             if s_date > current_date:
