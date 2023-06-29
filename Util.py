@@ -357,4 +357,6 @@ def last_day(file):
             return json.dumps(j[-1]['Date'])
         except IndexError:
             return json.dumps(None)
+        except FileNotFoundError:
+            return json.dumps(None)
 
