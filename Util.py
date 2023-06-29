@@ -354,7 +354,7 @@ def last_day(file):
     with open(file) as f:
         j = json.load(f)
         try:
-            return json.dumps(j[0]['Date'])
+            return json.dumps(j[-1]['Date'])
         except IndexError:
             return json.dumps(None)
 
