@@ -351,12 +351,14 @@ def get_holidays(startdate, enddate):
     return holidays
 
 def last_day(file):
-    with open(file) as f:
-        j = json.load(f)
-        try:
-            return json.dumps(j[-1]['Date'])
-        except IndexError:
+    try:
+        with open(file) as f:
+            j = json.load(f)
+            try:
+                return json.dumps(j[-1]['Date'])
+            except IndexError:
+                return json.dumps(None)
+    except FileNotFoundError:
             return json.dumps(None)
-        except FileNotFoundError:
-            return json.dumps(None)
+        
 
