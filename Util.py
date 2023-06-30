@@ -257,10 +257,9 @@ def getNSFromTelSched(range):
     return(json.dumps(schedule))
 
 def getObserversFromTelSchedule(schedule):
-    # with open('data.json') as json_file:
-    #     data = json.load(json_file)
     
     data = schedule['Schedule']
+    print(data)
 
     start = datetime.fromtimestamp(schedule['Start']/1000).strftime('%Y-%m-%d')
     end = datetime.fromtimestamp(schedule['End']/1000).strftime('%Y-%m-%d')
@@ -280,6 +279,7 @@ def getObserversFromTelSchedule(schedule):
     for night in data:
         n_date = int(str(night["Date"])[:10])
         n_date = datetime.fromtimestamp(n_date).strftime('%Y-%m-%d')
+        night["K1 PI"] == ""
         for observer in kOne:
             if n_date == observer["Date"]:
                 if night["K1 PI"] == "":
@@ -290,7 +290,7 @@ def getObserversFromTelSchedule(schedule):
                     night["K1 PI"] += " / " + observer["Principal"]
                     night["K1 Institution"] += " / " + observer["Institution"]
                     night["K1 Instrument"] += " / " + observer["Instrument"]
-
+        night["K2 PI"] == ""
         for observer in kTwo:
             if n_date == observer["Date"]:
                 if night["K2 PI"] == "":
