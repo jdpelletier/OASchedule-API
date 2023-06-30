@@ -80,6 +80,7 @@ def readFromJson(f):
 
     #TODO get this working
 def getNSFromTelSched(range):
+    print(range)
     try:
         start = datetime.fromtimestamp(range['Start']/1000).strftime('%Y-%m-%d')
     except TypeError:
