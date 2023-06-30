@@ -83,7 +83,9 @@ def getNSFromTelSched(range):
         start = datetime.fromtimestamp(range['Start']/1000).strftime('%Y-%m-%d')
     except TypeError:
         start = range['Start'][:10]
-    end = datetime.fromtimestamp(range['End']/1000).strftime('%Y-%m-%d')  
+        # TODO undo this when firstDay is added back in
+        end = range['End'][:10]
+    # end = datetime.fromtimestamp(range['End']/1000).strftime('%Y-%m-%d')  
 
     holidays = get_holidays(start, end)
     
