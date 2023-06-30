@@ -375,7 +375,7 @@ def fileCheck():
     try:
         file = open('data.json')
         file.close()
-        return "True"
+        return json.dumps({'File': True})
     except FileNotFoundError:
-        return "False"
+        return json.dumps({'File': False})
 
