@@ -259,7 +259,7 @@ def getObserversFromTelSchedule(schedule):
     # with open('data.json') as json_file:
     #     data = json.load(json_file)
     
-    data = json.load(schedule['Schedule'])
+    data = schedule['Schedule']
 
     start = datetime.fromtimestamp(schedule['Start']/1000).strftime('%Y-%m-%d')
     end = datetime.fromtimestamp(schedule['End']/1000).strftime('%Y-%m-%d')
