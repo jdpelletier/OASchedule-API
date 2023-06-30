@@ -81,6 +81,8 @@ def readFromJson(f):
 def getNSFromTelSched(range):
     try:
         start = datetime.fromtimestamp(range['Start']/1000).strftime('%Y-%m-%d')
+        # TODO undo this when firstDay is added back in
+        end = datetime.fromtimestamp(range['End']/1000).strftime('%Y-%m-%d') 
     except TypeError:
         start = range['Start'][:10]
         # TODO undo this when firstDay is added back in
