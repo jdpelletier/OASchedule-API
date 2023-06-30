@@ -249,9 +249,12 @@ def getNSFromTelSched(range):
     #         #             night["K2 Instrument"] += " / " + observer["Instrument"]
                     
     #         schedule.append(night)
-
-    # with open('data.json', 'w+', encoding='utf-8') as f:
-    #     json.dump(schedule, f, ensure_ascii=False, indent=4)
+    try:
+        file = open('data.json')
+        file.close()
+    except FileNotFoundError:
+        with open('data.json', 'w+', encoding='utf-8') as f:
+            json.dump(schedule, f, ensure_ascii=False, indent=4)
 
     return(json.dumps(schedule))
 
