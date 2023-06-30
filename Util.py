@@ -250,17 +250,19 @@ def getNSFromTelSched(range):
                     
     #         schedule.append(night)
 
-    with open('data.json', 'w+', encoding='utf-8') as f:
-        json.dump(schedule, f, ensure_ascii=False, indent=4)
+    # with open('data.json', 'w+', encoding='utf-8') as f:
+    #     json.dump(schedule, f, ensure_ascii=False, indent=4)
 
     return(json.dumps(schedule))
 
-def getObserversFromTelSchedule(range):
-    with open('data.json') as json_file:
-        data = json.load(json_file)
+def getObserversFromTelSchedule(schedule):
+    # with open('data.json') as json_file:
+    #     data = json.load(json_file)
+    
+    data = json.load(schedule['Schedule'])
 
-    start = datetime.fromtimestamp(range['Start']/1000).strftime('%Y-%m-%d')
-    end = datetime.fromtimestamp(range['End']/1000).strftime('%Y-%m-%d')
+    start = datetime.fromtimestamp(schedule['Start']/1000).strftime('%Y-%m-%d')
+    end = datetime.fromtimestamp(schedule['End']/1000).strftime('%Y-%m-%d')
     first_date = datetime.strptime(start, '%Y-%m-%d').date()
     last_date = datetime.strptime(end, '%Y-%m-%d').date()
     delta_days = (last_date-first_date).days
