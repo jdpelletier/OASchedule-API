@@ -250,10 +250,7 @@ def getNSFromTelSched(range):
     #         #             night["K2 Instrument"] += " / " + observer["Instrument"]
                     
     #         schedule.append(night)
-    try:
-        file = open('data.json')
-        file.close()
-    except FileNotFoundError:
+    if fileCheck() == False:
         with open('data.json', 'w+', encoding='utf-8') as f:
             json.dump(schedule, f, ensure_ascii=False, indent=4)
 
@@ -373,5 +370,12 @@ def last_day(file):
                 return json.dumps(None)
     except FileNotFoundError:
             return json.dumps(None)
-        
+
+def fileCheck():
+    try:
+        file = open('data.json')
+        file.close()
+        return True
+    except FileNotFoundError:
+        return False
 

@@ -42,3 +42,8 @@ def getEmployeeSchedule():
 @cross_origin()
 def get_last_day():
     return Util.last_day('data.json')
+
+@main.route('/file_check')
+@cross_origin()
+def check_for_file():
+    return Util.fileCheck()
