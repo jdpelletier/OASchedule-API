@@ -94,8 +94,10 @@ def getNSFromTelSched(range):
     
     nightstaff = []
     current_date = datetime.strptime(start, '%Y-%m-%d').date()
+    print(current_date)
     if range['Overlap'] == True:
         current_date = current_date - timedelta(days=2)
+        print(current_date)
     last_date = datetime.strptime(end, '%Y-%m-%d').date()
     while current_date <= last_date:
         response = requests.get(f"https://www.keck.hawaii.edu/software/db_api/telSchedule.php?cmd=getNightStaff&date={current_date}&type=oa")
