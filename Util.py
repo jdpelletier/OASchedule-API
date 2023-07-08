@@ -78,7 +78,6 @@ def readFromJson(f):
 
     return json.dumps(data)
 
-    #TODO get this working
 def getNSFromTelSched(range):
     print(range)
     try:
@@ -103,40 +102,11 @@ def getNSFromTelSched(range):
         nightstaff.append(data)
         current_date += timedelta(days=1)
 
-    # today = datetime.now()
-    # previousMonth = today-relativedelta(months=1)
-    # startyear = previousMonth.year
-    # startmonth = previousMonth.month
-    # lastyear = (today+relativedelta(months=4)).year
-    # lastmonth = (today+relativedelta(months=4)).month
-    # dates = []
-    # dates.append(previousMonth.strftime("%Y-%m"))
-    # dates.append(today.strftime("%Y-%m"))
-    # for i in range(1,4):
-    #     day = today+relativedelta(months=i)
-    #     dates.append(day.strftime("%Y-%m"))
-
-    # d = dates[0] + "-1"
-    # l = dates[3] + "-1"
-    # holidays = get_holidays(d, l)
-    
-    # nightstaff = []
-
-    # for d in dates:
-    #     response = requests.get(f"https://www.keck.hawaii.edu/software/db_api/telSchedule.php?cmd=getNightStaff&date={d}&type=oa")
-    #     data = response.json()
-    #     nightstaff.append(data)     
-    
-    # ns = []
-    # for x in range(0, len(nightstaff)):
-    #     ns += nightstaff[x]
-
     #TODO, get rid of nested loop
     oa_names = []
     for night in nightstaff:
         for oa in night:
             name = oa["FirstName"][0] + oa["LastName"][0]
-        # name = n["FirstName"][0] + n["LastName"][0]
         if name not in oa_names:
             oa_names.append(name)
 
@@ -185,73 +155,7 @@ def getNSFromTelSched(range):
                 
         schedule.append(night)
         current_date += timedelta(days=1)
-
-
-    # for i in range(startmonth,lastmonth):
-    #     for d in [x for x in Calendar().itermonthdates(startyear, i) if x.month == i]: #todo add checks for different years
-    #         night = {}
-    #         night["Date"] = datetime.fromtimestamp(time.mktime(d.timetuple())).timestamp()*1000
-    #         night["DOW"] = d.strftime('%A')[:3]
-    #         night["Holiday"] = ""
-    #         if str(d.strftime('%Y-%m-%d')) in holidays:
-    #             night["Holiday"] = "X"
-    #         night["K1 PI"] = ""
-    #         night["K1 Institution"] = ""
-    #         night["K1 Instrument"] = ""
-    #         # for observer in kOne:
-    #         #     s_date = datetime.strptime(observer["Date"], '%Y-%m-%d').date()
-    #         #     if s_date > d:
-    #         #         break
-    #         #     if s_date == d:
-    #                 # if night["K1 PI"] == "":
-    #                 #     night["K1 PI"] += observer["Principal"]
-    #                 #     night["K1 Institution"] += observer["Institution"]
-    #                 #     night["K1 Instrument"] += observer["Instrument"]
-    #                 # else:
-    #                 #     night["K1 PI"] += " / " + observer["Principal"]
-    #                 #     night["K1 Institution"] += " / " + observer["Institution"]
-    #                 #     night["K1 Instrument"] += " / " + observer["Instrument"]
-
-    #         for name in oa_names:
-    #             night[name] = None
-
-    #         people = 0
-    #         for staff in oas:
-    #             s_date = datetime.strptime(staff["Date"], '%Y-%m-%d').date()
-    #             if s_date > d:
-    #                 break
-    #             if s_date == d:
-    #                 name = staff["FirstName"][0] + staff["LastName"][0]
-    #                 shift = staff["Type"].upper()
-    #                 if "R" in shift:
-    #                     tel = "R" + staff["TelNr"]
-    #                     night[name] = shift.replace("OAR", tel)
-    #                     people += 1
-    #                 else:
-    #                     tel = "K" + staff["TelNr"]
-    #                     night[name] = shift.replace("OA", tel)
-    #                     people += 1
-    #         if people == 0:
-    #             break
-
-    #         night["K2 PI"] = ""
-    #         night["K2 Institution"] = ""
-    #         night["K2 Instrument"] = ""
-    #         # for observer in kTwo:
-    #         #     s_date = datetime.strptime(observer["Date"], '%Y-%m-%d').date()
-    #         #     if s_date > d:
-    #         #         break
-    #         #     if s_date == d:
-    #         #         if night["K2 PI"] == "":
-    #         #             night["K2 PI"] += observer["Principal"]
-    #         #             night["K2 Institution"] += observer["Institution"]
-    #         #             night["K2 Instrument"] += observer["Instrument"]
-    #         #         else:
-    #         #             night["K2 PI"] += " / " + observer["Principal"]
-    #         #             night["K2 Institution"] += " / " + observer["Institution"]
-    #         #             night["K2 Instrument"] += " / " + observer["Instrument"]
-                    
-    #         schedule.append(night)
+        
     if fileCheck() == False:
         with open('data.json', 'w+', encoding='utf-8') as f:
             json.dump(schedule, f, ensure_ascii=False, indent=4)
