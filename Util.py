@@ -79,7 +79,6 @@ def readFromJson(f):
     return json.dumps(data)
 
 def getNSFromTelSched(range):
-    print(range)
     try:
         start = datetime.fromtimestamp(range['Start']/1000).strftime('%Y-%m-%d')
     except TypeError:
@@ -155,7 +154,7 @@ def getNSFromTelSched(range):
                 
         schedule.append(night)
         current_date += timedelta(days=1)
-        
+
     if fileCheck() == False:
         with open('data.json', 'w+', encoding='utf-8') as f:
             json.dump(schedule, f, ensure_ascii=False, indent=4)
