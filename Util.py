@@ -262,7 +262,7 @@ def getObserversFromTelSchedule(schedule):
 
     start = datetime.fromtimestamp(schedule['Start']/1000).strftime('%Y-%m-%d')
     end = datetime.fromtimestamp(schedule['End']/1000).strftime('%Y-%m-%d')
-    set_date = datetime.strptime(start, '%Y-%m-%d').date()
+    set_date = datetime.strptime(start, '%Y-%m-%d').date() + timedelta(days=1)
     last_date = datetime.strptime(end, '%Y-%m-%d').date()
     delta_days = (last_date-set_date).days
     if delta_days > 120:
