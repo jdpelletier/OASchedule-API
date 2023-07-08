@@ -58,7 +58,7 @@ def writeToJson(f):
     for col in df:
         if col == 'K2 Instrument':
             search = False
-        if col != col.isupper() == False and search == True:
+        if col != col.isupper() == False and col != 'Mtg' and search == True:
             df = df.drop(col, 1)
         if col == 'K1 Instrument':
             search = True
