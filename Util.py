@@ -262,12 +262,12 @@ def getObserversFromTelSchedule(schedule):
 
     start = datetime.fromtimestamp(schedule['Start']/1000).strftime('%Y-%m-%d')
     end = datetime.fromtimestamp(schedule['End']/1000).strftime('%Y-%m-%d')
-    set_date = datetime.strptime(start, '%Y-%m-%d').date() + timedelta(days=1)
+    set_date = datetime.strptime(start, '%Y-%m-%d').date()
     last_date = datetime.strptime(end, '%Y-%m-%d').date()
     delta_days = (last_date-set_date).days
     if delta_days > 120:
         delta_days = 120
-        set_date = last_date-timedelta(days=120)
+        set_date = last_date-timedelta(days=119)
 
     response = requests.get(f"https://www.keck.hawaii.edu/software/db_api/telSchedule.php?cmd=getSchedule&date={set_date}&numdays={delta_days}")
     observers = response.json()
