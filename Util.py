@@ -90,7 +90,7 @@ def compareJsons(excelfile):
     i=0
     for night in excelfile:
         for col in night:
-            print(col)
+            print(night.col)
             if night[col] != ns[i][col]:
                 excelfile[night].telschedmismatch = 'X'
         i+=1
