@@ -98,7 +98,7 @@ def compareJsons(excelfile):
                 pass
         i+=1
 
-    return json.dumps(excelfile)
+    return excelfile
 
 def getNSFromTelSched(range):
     try:
