@@ -91,8 +91,11 @@ def compareJsons(excelfile):
     for night in excelfile:
         tsnight = ns[i]
         for col in night:
-            if night[col] != tsnight[col]:
-                night['TelSchedMismatch'] = 'X'
+            try:
+                if night[col] != tsnight[col]:
+                    night['TelSchedMismatch'] = 'X'
+            except KeyError:
+                pass
         i+=1
 
     return json.dumps(exce)
