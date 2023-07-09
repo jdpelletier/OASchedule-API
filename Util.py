@@ -89,7 +89,7 @@ def compareJsons():
 
     i=0
     include = ['K1', 'K2', 'K1O', 'K20', 'R1', 'R2', 'R1O', 'R2O', 'R1T', 'R2T', 'K1T', 'K2T']
-    for night in excelfile:
+    for night in data:
         tsnight = ns[i]
         for col in night:
             try:
@@ -99,7 +99,7 @@ def compareJsons():
                 pass
         i+=1
 
-    return json.dumps(excelfile)
+    return json.dumps(data)
 
 def getNSFromTelSched(range):
     try:
