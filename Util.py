@@ -93,7 +93,7 @@ def compareJsons():
         tsnight = ns[i]
         for col in night:
             try:
-                if night[col] in include and night[col] != tsnight[col]:
+                if night[col] in include and night[col] != tsnight[col] or tsnight[col] in include and night[col] != tsnight[col] :
                     night[col] += '!'
             except KeyError:
                 pass
