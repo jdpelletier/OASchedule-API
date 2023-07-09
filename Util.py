@@ -87,10 +87,12 @@ def compareJsons(excelfile):
     
     ns = getNSFromTelSched(range)
 
+    i=0
     for night in excelfile:
         for col in night:
-            if night[col] != ns[night][col]:
+            if night[col] != ns[i][col]:
                 excelfile[night].telschedmismatch = 'X'
+        i+=1
 
     return json.dumps(exce)
 
