@@ -86,6 +86,7 @@ def compareJsons(excelfile):
     range = {'Start': excelfile[0]['Date'], 'End': excelfile[-1]['Date'], 'Overlap': False}
     
     ns = getNSFromTelSched(range)
+    print(ns)
 
     i=0
     for night in excelfile:
