@@ -21,7 +21,7 @@ def display_schedule():
 @main.route('/compare')
 @cross_origin()
 def compare_schedule():
-    return Util.getNSFromTelSched()
+    return Util.compareJsons()
 
 @main.route('/nightstaff', methods=['POST'])
 @cross_origin()
