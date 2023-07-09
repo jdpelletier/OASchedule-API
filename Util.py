@@ -99,6 +99,8 @@ def compareJsons():
                 pass
         i+=1
 
+    print(json.dump(excelfile))
+
     return json.dumps(excelfile)
 
 def getNSFromTelSched(range):
