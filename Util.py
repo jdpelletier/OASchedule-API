@@ -88,11 +88,12 @@ def compareJsons(excelfile):
     ns = json.loads(getNSFromTelSched(range))
 
     i=0
-    for night in excelfile:
+    include = ['K1', 'K2', 'K1O', 'K20', 'R1', 'R2', 'R1O', 'R2O', 'R1T', 'R2T', 'K1T', 'K2T']
+    for night in excelfile
         tsnight = ns[i]
         for col in night:
             try:
-                if night[col] != tsnight[col]:
+                if night[col] is in include and night[col] != tsnight[col]:
                     night['TelSchedMismatch'] = 'X'
             except KeyError:
                 pass
