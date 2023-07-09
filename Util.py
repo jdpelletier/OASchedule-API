@@ -99,7 +99,7 @@ def compareJsons():
                 pass
         i+=1
 
-    print(json.dump(excelfile))
+    print(json.dumps(excelfile))
 
     return json.dumps(excelfile)
 
