@@ -18,6 +18,11 @@ def update_schedule():
 def display_schedule():
     return Util.readFromJson('data.json')
 
+@main.route('/compare')
+@cross_origin()
+def compare_schedule():
+    return Util.getNSFromTelSched()
+
 @main.route('/nightstaff', methods=['POST'])
 @cross_origin()
 def getNightStaff():
