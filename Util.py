@@ -45,7 +45,6 @@ def writeToJson(f):
         holder.append("")
     
     df['Holiday'] = holder
-    df['TelSchedMismatch'] = holder
 
     hol = get_holidays(list(df['Date'].values[:1])[0], list(df['Date'].values[-1:])[0])
     hol_dates = [h+" 00:00:00-10:00" for h in hol]
@@ -94,7 +93,7 @@ def compareJsons(excelfile):
         for col in night:
             try:
                 if night[col] in include and night[col] != tsnight[col]:
-                    night['TelSchedMismatch'] = 'X'
+                    night['col'] += '!'
             except KeyError:
                 pass
         i+=1
@@ -174,7 +173,6 @@ def getNSFromTelSched(range):
         night["K2 PI"] = ""
         night["K2 Institution"] = ""
         night["K2 Instrument"] = ""
-        night["TelSchedMismatch"] = ""
                 
         schedule.append(night)
         current_date += timedelta(days=1)
