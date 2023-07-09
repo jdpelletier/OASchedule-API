@@ -92,7 +92,7 @@ def compareJsons(excelfile):
         tsnight = ns[i]
         for col in night:
             if night[col] != tsnight[col]:
-                night['telschedmismatch'] = 'X'
+                night['TelSchedMismatch'] = 'X'
         i+=1
 
     return json.dumps(exce)
