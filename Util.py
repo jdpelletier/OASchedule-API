@@ -89,9 +89,10 @@ def compareJsons(excelfile):
 
     i=0
     for night in excelfile:
+        tsnight = ns[i]
         for col in night:
-            print(night[col])
-            if night[col] != ns[i][col]:
+            print(tsnight[col])
+            if night[col] != tsnight[col]:
                 excelfile[night].telschedmismatch = 'X'
         i+=1
 
