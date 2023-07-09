@@ -77,9 +77,9 @@ def readFromJson(f):
     with open(f) as json_file:
         data = json.load(json_file)
 
-    compared = compareJsons(data)
+    # data = compareJsons(data)
 
-    return json.dumps(compared)
+    return json.dumps(data)
 
 def compareJsons(excelfile):
 
