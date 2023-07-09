@@ -83,7 +83,7 @@ def readFromJson(f):
 
 def compareJsons(excelfile):
 
-    range = {'Start': excelfile[0].date, 'End': excelfile[-1].date, 'Overlap': False}
+    range = {'Start': excelfile[0].Date, 'End': excelfile[-1].Date, 'Overlap': False}
     
     ns = getNSFromTelSched(range)
 
