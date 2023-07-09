@@ -93,7 +93,7 @@ def compareJsons(excelfile):
         for col in night:
             try:
                 if night[col] in include and night[col] != tsnight[col]:
-                    night['col'] += '!'
+                    night[col] += '!'
             except KeyError:
                 pass
         i+=1
