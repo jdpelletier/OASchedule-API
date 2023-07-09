@@ -93,7 +93,7 @@ def compareJsons(excelfile):
         tsnight = ns[i]
         for col in night:
             try:
-                if night[col] is in include and night[col] != tsnight[col]:
+                if night[col] in include and night[col] != tsnight[col]:
                     night['TelSchedMismatch'] = 'X'
             except KeyError:
                 pass
