@@ -80,7 +80,7 @@ def readFromJson(f):
 
 def compareJsons():
 
-    with open(f) as json_file:
+    with open('data.json') as json_file:
         data = json.load(json_file)
 
     range = {'Start': data[0]['Date'], 'End': data[-1]['Date'], 'Overlap': False}
