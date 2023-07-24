@@ -5,8 +5,6 @@ import requests
 from dateutil.relativedelta import relativedelta
 from calendar import Calendar
 import time
-# import pymysql
-# import pymysql.cursors
 
 def writeToJson(f):
 
@@ -269,28 +267,6 @@ def exportPersonalSchedule(f, employee):
 
 
 def get_holidays(startdate, enddate):
-
-    # """
-    # Returns any scheduled holidays for the time period
-    # """
-    # dbhost = "mysqlserver"
-    # dbuser = "sched"
-    # dbpwd  = "sched"
-    # db     = "common"
-    # hConn = pymysql.connect(host=dbhost, user=dbuser, password=dbpwd, db=db, cursorclass=pymysql.cursors.DictCursor)
-    # hCursor = hConn.cursor()
-
-    # query = 'SELECT * FROM holidays WHERE date>=%s and date<=%s'
-    # result = hCursor.execute(query, (startdate,enddate,))
-    # entries = hCursor.fetchall()
-
-    # if hConn:
-    #     hCursor.close()
-    #     hConn.close()
-
-    # holidays = []
-    # for entry in entries:
-    #     holidays.append(entry['date'].strftime('%Y-%m-%d'))
     
     response = requests.get(f"https://vm-appserver.keck.hawaii.edu/api/pp/holidays?startdate={startdate}&enddate={enddate}")
 
