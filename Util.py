@@ -201,6 +201,7 @@ def getObserversFromTelSchedule(schedule):
         data = json.load(json_file)
 
     response = requests.get(data[0]['schedule'] + f"&date={set_date}&numdays={delta_days}")
+    print(data[0]['schedule'] + f"&date={set_date}&numdays={delta_days}")
     observers = response.json()
     
     kOne = [x for x in observers if "1" in x["TelNr"]]
