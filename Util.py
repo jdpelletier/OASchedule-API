@@ -118,8 +118,8 @@ def getNSFromTelSched(range):
         last_date = last_date - timedelta(days=1)
     while current_date <= last_date:
         with open('config.json') as json_file:
-            data = json.load(json_file)
-        response = requests.get(data[0]['nightstaff'] + f"&date={current_date}&type=oa")
+            config = json.load(json_file)
+        response = requests.get(config[0]['nightstaff'] + f"&date={current_date}&type=oa")
         data = response.json()
         nightstaff.append(data)
         current_date += timedelta(days=1)
@@ -198,46 +198,43 @@ def getObserversFromTelSchedule(schedule):
         set_date = last_date-timedelta(days=119)
     
     with open('config.json') as json_file:
-        data = json.load(json_file)
+        config = json.load(json_file)
 
-    response = requests.get(data[0]['schedule'] + f"&date={set_date}&numdays={delta_days}")
+    response = requests.get(config[0]['schedule'] + f"&date={set_date}&numdays={delta_days}")
     observers = response.json()
     
     kOne = [x for x in observers if "1" in x["TelNr"]]
     kTwo = [x for x in observers if "2" in x["TelNr"]]
 
     for night in data:
-        try:
-            n_date = int(str(night["Date"])[:10])
-            n_date = datetime.fromtimestamp(n_date).strftime('%Y-%m-%d')
-            night["K1 PI"] = ""
-            night["K1 Institution"] = ""
-            night["K1 Instrument"] = ""
-            for observer in kOne:
-                if n_date == observer["Date"]:
-                    if night["K1 PI"] == "":
-                            night["K1 PI"] += observer["Principal"]
-                            night["K1 Institution"] += observer["Institution"]
-                            night["K1 Instrument"] += observer["Instrument"]
-                    else:
-                        night["K1 PI"] += " / " + observer["Principal"]
-                        night["K1 Institution"] += " / " + observer["Institution"]
-                        night["K1 Instrument"] += " / " + observer["Instrument"]
-            night["K2 PI"] = ""
-            night["K2 Institution"] = ""
-            night["K2 Instrument"] = ""
-            for observer in kTwo:
-                if n_date == observer["Date"]:
-                    if night["K2 PI"] == "":
-                            night["K2 PI"] += observer["Principal"]
-                            night["K2 Institution"] += observer["Institution"]
-                            night["K2 Instrument"] += observer["Instrument"]
-                    else:
-                        night["K2 PI"] += " / " + observer["Principal"]
-                        night["K2 Institution"] += " / " + observer["Institution"]
-                        night["K2 Instrument"] += " / " + observer["Instrument"]
-        except KeyError:
-            print(night)
+        n_date = int(str(night["Date"])[:10])
+        n_date = datetime.fromtimestamp(n_date).strftime('%Y-%m-%d')
+        night["K1 PI"] = ""
+        night["K1 Institution"] = ""
+        night["K1 Instrument"] = ""
+        for observer in kOne:
+            if n_date == observer["Date"]:
+                if night["K1 PI"] == "":
+                        night["K1 PI"] += observer["Principal"]
+                        night["K1 Institution"] += observer["Institution"]
+                        night["K1 Instrument"] += observer["Instrument"]
+                else:
+                    night["K1 PI"] += " / " + observer["Principal"]
+                    night["K1 Institution"] += " / " + observer["Institution"]
+                    night["K1 Instrument"] += " / " + observer["Instrument"]
+        night["K2 PI"] = ""
+        night["K2 Institution"] = ""
+        night["K2 Instrument"] = ""
+        for observer in kTwo:
+            if n_date == observer["Date"]:
+                if night["K2 PI"] == "":
+                        night["K2 PI"] += observer["Principal"]
+                        night["K2 Institution"] += observer["Institution"]
+                        night["K2 Instrument"] += observer["Instrument"]
+                else:
+                    night["K2 PI"] += " / " + observer["Principal"]
+                    night["K2 Institution"] += " / " + observer["Institution"]
+                    night["K2 Instrument"] += " / " + observer["Instrument"]
 
 
     return(json.dumps(data))    
@@ -277,9 +274,9 @@ def exportPersonalSchedule(f, employee):
 def get_holidays(startdate, enddate):
 
     with open('config.json') as json_file:
-        data = json.load(json_file)
+        config = json.load(json_file)
     
-    response = requests.get(data[0]['holidays'] + f"?startdate={startdate}&enddate={enddate}")
+    response = requests.get(config[0]['holidays'] + f"?startdate={startdate}&enddate={enddate}")
 
     return response.json()
 
