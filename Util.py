@@ -119,7 +119,7 @@ def getNSFromTelSched(range):
     while current_date <= last_date:
         with open('config.json') as json_file:
             data = json.load(json_file)
-        response = requests.get(data['nightstaff'])
+        response = requests.get(data.nightstaff)
         data = response.json()
         nightstaff.append(data)
         current_date += timedelta(days=1)
@@ -200,7 +200,7 @@ def getObserversFromTelSchedule(schedule):
     with open('config.json') as json_file:
         data = json.load(json_file)
 
-    response = requests.get(data['schedule'])
+    response = requests.get(data.schedule)
     observers = response.json()
     
     kOne = [x for x in observers if "1" in x["TelNr"]]
@@ -276,7 +276,7 @@ def get_holidays(startdate, enddate):
     with open('config.json') as json_file:
         data = json.load(json_file)
     
-    response = requests.get(data['holidays'])
+    response = requests.get(data.holidays)
 
     return response.json()
 
