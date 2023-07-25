@@ -117,7 +117,9 @@ def getNSFromTelSched(range):
     if range['Overlap'] == True:
         last_date = last_date - timedelta(days=1)
     while current_date <= last_date:
-        response = requests.get(f"https://www.keck.hawaii.edu/software/db_api/telSchedule.php?cmd=getNightStaff&date={current_date}&type=oa")
+        with open('config.json') as json_file:
+            data = json.load(json_file)
+        response = requests.get(data['nightstaff'])
         data = response.json()
         nightstaff.append(data)
         current_date += timedelta(days=1)
@@ -194,8 +196,11 @@ def getObserversFromTelSchedule(schedule):
     if delta_days > 120:
         delta_days = 120
         set_date = last_date-timedelta(days=119)
+    
+    with open('config.json') as json_file:
+        data = json.load(json_file)
 
-    response = requests.get(f"https://www.keck.hawaii.edu/software/db_api/telSchedule.php?cmd=getSchedule&date={set_date}&numdays={delta_days}")
+    response = requests.get(data['schedule'])
     observers = response.json()
     
     kOne = [x for x in observers if "1" in x["TelNr"]]
@@ -267,8 +272,11 @@ def exportPersonalSchedule(f, employee):
 
 
 def get_holidays(startdate, enddate):
+
+    with open('config.json') as json_file:
+        data = json.load(json_file)
     
-    response = requests.get(f"https://vm-appserver.keck.hawaii.edu/api/pp/holidays?startdate={startdate}&enddate={enddate}")
+    response = requests.get(data['holidays'])
 
     return response.json()
 
