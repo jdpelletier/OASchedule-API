@@ -129,8 +129,8 @@ def getNSFromTelSched(range):
     for night in nightstaff:
         for oa in night:
             name = oa["FirstName"][0] + oa["LastName"][0]
-        if name not in oa_names:
-            oa_names.append(name)
+            if name not in oa_names:
+                oa_names.append(name)
 
 
     schedule = []
