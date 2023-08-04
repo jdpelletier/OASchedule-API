@@ -1,9 +1,9 @@
 [
     {
-    "holidays" : "https://vm-appserver.keck.hawaii.edu/api/pp/holidays",
-    "nightstaff" : "https://www.keck.hawaii.edu/software/db_api/telSchedule.php?cmd=getNightStaff",
-    "schedule" : "https://www.keck.hawaii.edu/software/db_api/telSchedule.php?cmd=getSchedule",
-    "night_shifts" : ["K1", "K2", "K1O", "K20", "R1", "R2", "R1O", "R2O", "R1T", "R2T", "K1T", "K2T"],
-    "all_shifts" : ["K1", "R1", "K1O", "R1O", "K1T", "R1T", "R2", "K2", "R2O", "K2O", "R2T", "K2T", "HQ", "PD", "SD", "OM"]
+    "holidays" : "",
+    "nightstaff" : "",
+    "schedule" : "",
+    "night_shifts" : [],
+    "all_shifts" : []
     }
 ]
