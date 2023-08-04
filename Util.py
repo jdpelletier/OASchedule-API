@@ -87,7 +87,7 @@ def compareJsons():
     
     ns = json.loads(getNSFromTelSched(range))
 
-    with open('config.live.json') as json_file:
+    with open('config.json') as json_file:
             config = json.load(json_file)
     include = config[0]['night_shifts']
     i=0
@@ -121,7 +121,7 @@ def getNSFromTelSched(range):
     if range['Overlap'] == True:
         last_date = last_date - timedelta(days=1)
     while current_date <= last_date:
-        with open('config.live.json') as json_file:
+        with open('config.json') as json_file:
             config = json.load(json_file)
         response = requests.get(config[0]['nightstaff'] + f"&date={current_date}&type=oa")
         data = response.json()
@@ -201,7 +201,7 @@ def getObserversFromTelSchedule(schedule):
         delta_days = 120
         set_date = last_date-timedelta(days=119)
     
-    with open('config.live.json') as json_file:
+    with open('config.json') as json_file:
         config = json.load(json_file)
 
     response = requests.get(config[0]['schedule'] + f"&date={set_date}&numdays={delta_days}")
@@ -253,7 +253,7 @@ def exportPersonalSchedule(f, employee):
     df = df.drop(columns='Date')
 
 
-    with open('config.live.json') as json_file:
+    with open('config.json') as json_file:
             config = json.load(json_file)
     work_days = config[0]['all_shifts']
     location = []
@@ -278,7 +278,7 @@ def exportPersonalSchedule(f, employee):
 
 def get_holidays(startdate, enddate):
 
-    with open('config.live.json') as json_file:
+    with open('config.json') as json_file:
         config = json.load(json_file)
     
     response = requests.get(config[0]['holidays'] + f"?startdate={startdate}&enddate={enddate}")
