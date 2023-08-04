@@ -81,12 +81,16 @@ def compareJsons():
     with open('data.json') as json_file:
         data = json.load(json_file)
 
+    
+
     range = {'Start': data[0]['Date'], 'End': data[-1]['Date'], 'Overlap': False}
     
     ns = json.loads(getNSFromTelSched(range))
 
+    with open('config.json') as json_file:
+            config = json.load(json_file)
+    include = config[0]['night_shifts']
     i=0
-    include = ['K1', 'K2', 'K1O', 'K20', 'R1', 'R2', 'R1O', 'R2O', 'R1T', 'R2T', 'K1T', 'K2T']
     for night in data:
         tsnight = ns[i]
         for col in night:
@@ -249,8 +253,9 @@ def exportPersonalSchedule(f, employee):
     df = df.drop(columns='Date')
 
 
-
-    work_days = ['K1', 'R1', 'K1O', 'R1O', 'K1T', 'R1T', 'R2', 'K2', 'R2O', 'K2O', 'R2T', 'K2T', 'HQ', 'PD', 'SD', 'OM']
+    with open('config.json') as json_file:
+            config = json.load(json_file)
+    work_days = config[0]['all_shifts']
     location = []
     for ind in df.index:
         current = df['Subject'][ind]
