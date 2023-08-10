@@ -306,11 +306,11 @@ def fileCheck():
 
 def isAdmin(data):
     username = data['Username']
-    
+
     with open('config.live.json') as json_file:
         config = json.load(json_file)
     
-    if username in config[0]['Admins']:
+    if username in config[0]['admins']:
         response = {'Admin': True}
     else:
         response = {'Admin': False}
