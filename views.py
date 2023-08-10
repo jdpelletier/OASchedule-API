@@ -46,3 +46,8 @@ def getEmployeeSchedule():
 @cross_origin()
 def check_for_file():
     return Util.fileCheck()
+
+@main.route('/is_admin', methods=['POST'])
+@cross_origin()
+def isAdmin():
+    return Util.isAdmin(request.get_json())

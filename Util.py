@@ -304,3 +304,14 @@ def fileCheck():
     except FileNotFoundError:
         return json.dumps({'File': False})
 
+def isAdmin(data):
+    username = data['Username']
+    
+    with open('config.live.json') as json_file:
+        config = json.load(json_file)
+    
+    if username in config[0]['Admins']:
+        response = {'Admin': True}
+    else:
+        response = {'Admin': False}
+    return json.dumps(response)
