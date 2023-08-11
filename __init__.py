@@ -23,7 +23,7 @@ if __name__ == '__main__':
 
     app = create_app()
     host = '0.0.0.0'
-    port = 53872
+    port = 53879
 
     # run flask server
     print(f"Starting OA Homepage API: PORT = {port}")
