@@ -26,7 +26,7 @@ if __name__ == '__main__':
     port = 53879
 
     # run flask server
-    print(f"Starting OA Homepage API: PORT = {port}")
+    print(f"Starting OA Schedule API: PORT = {port}")
     # app.run(host=host, port=port)
     app.run(host=host, port=port, ssl_context='adhoc')
-    print("Stopping OA Homepage API.")
+    print("Stopping OA Schedule API.")
