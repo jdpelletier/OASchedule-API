@@ -28,5 +28,5 @@ if __name__ == '__main__':
     # run flask server
     print(f"Starting OA Schedule API: PORT = {port}")
     # app.run(host=host, port=port)
-    app.run(host=host, port=port, ssl_context='adhoc')
+    app.run(host=host, port=port)
     print("Stopping OA Schedule API.")
