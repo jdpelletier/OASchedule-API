@@ -5,6 +5,9 @@ import requests
 from dateutil.relativedelta import relativedelta
 from calendar import Calendar
 import time
+import urllib3
+
+requests.packages.urllib3.util.ssl_.DEFAULT_CIPHERS = 'ALL:@SECLEVEL=1'
 
 def writeToJson(f):
 
