@@ -199,7 +199,7 @@ def getObserversFromTelSchedule(schedule):
     delta_days = (last_date-set_date).days + 1
     if delta_days > 120:
         delta_days = 120
-        set_date = last_date-timedelta(days=119)
+        last_date = last_date-timedelta(days=119)
     
     with open('config.live.json') as json_file:
         config = json.load(json_file)
