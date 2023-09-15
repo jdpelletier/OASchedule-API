@@ -213,6 +213,8 @@ def getObserversFromTelSchedule(schedule):
     for night in data:
         n_date = int(str(night["Date"])[:10])
         n_date = datetime.fromtimestamp(n_date).strftime('%Y-%m-%d')
+        if n_date == last_date:
+            break
         night["K1 PI"] = ""
         night["K1 Institution"] = ""
         night["K1 Instrument"] = ""
