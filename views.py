@@ -8,8 +8,8 @@ main = Blueprint('main', __name__)
 @main.route('/update_schedule', methods=['POST'])
 @cross_origin()
 def update_schedule():
-    user = request.form.get_json()
-    admin = return Util.isAdmin(user)
+    user = request.form['user']
+    admin = Util.isAdmin(user.get_json())
     if admin == True:
         f = request.files['file']
         status = Util.writeToJson(f)
