@@ -10,7 +10,7 @@ main = Blueprint('main', __name__)
 @cross_origin()
 def update_schedule():
     user = request.form['user']
-    admin = Util.isAdmin(json.loads(user))
+    admin = json.loads(Util.isAdmin(json.loads(user)))
     if admin["Admin"] == True:
         f = request.files['file']
         status = Util.writeToJson(f)
