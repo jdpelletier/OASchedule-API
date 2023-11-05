@@ -1,6 +1,7 @@
-from flask import Blueprint, jsonify, request, send_file
+from flask import Blueprint, request, send_file
 import Util
 from flask_cors import cross_origin
+import json
 
 
 main = Blueprint('main', __name__)
@@ -9,7 +10,7 @@ main = Blueprint('main', __name__)
 @cross_origin()
 def update_schedule():
     user = request.form['user']
-    admin = Util.isAdmin(json_loads(user))
+    admin = Util.isAdmin(json.loads(user))
     if admin == True:
         f = request.files['file']
         status = Util.writeToJson(f)
