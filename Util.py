@@ -308,6 +308,7 @@ def fileCheck():
         return json.dumps({'File': False})
 
 def isAdmin(data):
+    print(data)
     username = data['Username']
 
     with open('config.live.json') as json_file:
