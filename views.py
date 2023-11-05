@@ -11,7 +11,7 @@ main = Blueprint('main', __name__)
 def update_schedule():
     user = request.form['user']
     admin = Util.isAdmin(json.loads(user))
-    if admin == True:
+    if admin["Admin"] == True:
         f = request.files['file']
         status = Util.writeToJson(f)
     return Util.readFromJson('data.json')
