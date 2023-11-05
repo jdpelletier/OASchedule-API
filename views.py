@@ -10,7 +10,6 @@ main = Blueprint('main', __name__)
 def update_schedule():
     f = request.files['file']
     status = Util.writeToJson(f)
-    print(status)
     return Util.readFromJson('data.json')
 
 @main.route('/')
