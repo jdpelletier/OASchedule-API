@@ -52,5 +52,4 @@ def check_for_file():
 @main.route('/is_admin', methods=['POST'])
 @cross_origin()
 def isAdmin():
-    user = request.form['user']
     return Util.isAdmin(request.get_json())
