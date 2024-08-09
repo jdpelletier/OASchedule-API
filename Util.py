@@ -123,7 +123,7 @@ def getNSFromTelSched(range):
     while current_date <= last_date:
         with open('config.live.json') as json_file:
             config = json.load(json_file)
-        response = requests.get(config[0]['nightstaff'] + f"&date={current_date}&type=oa")
+        response = requests.get(config[0]['nightstaff'] + f"&date={current_date}&type=oa", verify=False)
         data = response.json()
         nightstaff.append(data)
         current_date += timedelta(days=1)
@@ -204,7 +204,7 @@ def getObserversFromTelSchedule(schedule):
     with open('config.live.json') as json_file:
         config = json.load(json_file)
 
-    response = requests.get(config[0]['schedule'] + f"&date={set_date}&numdays={delta_days}")
+    response = requests.get(config[0]['schedule'] + f"&date={set_date}&numdays={delta_days}", verify=False)
     observers = response.json()
     
     kOne = [x for x in observers if "1" in x["TelNr"]]
