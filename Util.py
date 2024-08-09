@@ -284,7 +284,7 @@ def get_holidays(startdate, enddate):
     with open('config.live.json') as json_file:
         config = json.load(json_file)
     
-    response = requests.get(config[0]['holidays'] + f"?startdate={startdate}&enddate={enddate}")
+    response = requests.get(config[0]['holidays'] + f"?startdate={startdate}&enddate={enddate}", verify=False)
 
     return response.json()
 
