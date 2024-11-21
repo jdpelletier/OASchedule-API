@@ -41,7 +41,7 @@ def getObservers():
 def getEmployeeSchedule():
     emp = request.get_json()
     try:
-        return send_file(Util.exportPersonalSchedule('data.json', emp["employee"]), attachment_filename=f'{emp["employee"]}.csv', as_attachment=True)
+        return send_file(Util.exportPersonalSchedule('data.json', emp["employee"]), download_name=f'{emp["employee"]}.csv', as_attachment=True)
     except Exception as e:
         return str(e)
 
